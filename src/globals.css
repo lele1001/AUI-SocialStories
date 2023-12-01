@@ -1,0 +1,130 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-my-yellow text-my-blue min-h-screen font-inter;
+  }
+
+  .titleContainer {
+    @apply flex flex-col justify-center items-center bg-my-blue text-white rounded-2xl max-h-3 p-8 w-80 mb-1;
+  }
+
+  .formContainer {
+    @apply flex flex-col justify-center items-center bg-white rounded-2xl p-5 w-80 gap-4;
+  }
+
+  .storyContainer {
+    @apply flex flex-col justify-start items-center bg-white p-5 gap-5 w-465 h-full;
+  }
+
+}
+
+@layer utilities {
+  /* TYPOGRAPHY */
+  .h1-bold {
+    @apply text-[62px] font-bold leading-[140%] tracking-tighter;
+  }
+
+  .h1-semibold {
+    @apply text-[62px] font-semibold leading-[140%] tracking-tighter;
+  }
+
+  .h2-bold {
+    @apply text-[48px] font-bold leading-[140%];
+  }
+
+  .h3-bold {
+    @apply text-[40px] font-bold leading-[140%];
+  }
+
+  .base-semibold {
+    @apply text-[16px] font-semibold leading-[140%] tracking-tighter;
+  }
+
+  .base-medium {
+    @apply text-[24px] font-medium leading-[140%];
+  }
+
+  .base-regular {
+    @apply text-[24px] font-normal leading-[140%];
+  }
+
+  .body-bold {
+    @apply text-[20px] font-bold leading-[140%];
+  }
+
+  .body-medium {
+    @apply text-[20px] font-medium leading-[140%];
+  }
+
+  .small-semibold {
+    @apply text-[18px] font-semibold leading-[140%] tracking-tighter;
+  }
+
+  .small-medium {
+    @apply text-[18px] font-medium leading-[140%];
+  }
+
+  .small-regular {
+    @apply text-[18px] font-normal leading-[140%];
+  }
+
+  .subtle-semibold {
+    @apply text-[14px] font-semibold leading-[140%];
+  }
+
+  .subtle-regular {
+    @apply text-[14px] font-normal leading-[140%];
+  }
+
+  .tiny-medium {
+    @apply text-[14px] font-medium leading-[140%];
+  }
+
+  /* UTILITIES */
+  .invert-white {
+    @apply invert brightness-0 transition;
+  }
+
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .flex-end {
+    @apply flex justify-center items-end;
+  }
+  
+  .top-bar {
+    @apply flex items-center w-full p-4;
+  }
+
+  .t-title {
+    @apply top-bar justify-center;
+  }
+
+  .select-bar {
+    @apply flex-end w-full p-44;
+  }
+}
+
+
+@layer components {
+  /* Button */
+  .button_primary {
+    @apply bg-my-blue text-white gap-2 w-32 !important;
+  }
+
+  .item_button {
+    @apply bg-my-blue text-white w-3/4 rounded-3xl text-[20px] font-semibold py-8 whitespace-normal !important;
+    max-width: 75%;
+  }
+
+  .home_button {
+    @apply bg-my-blue text-white w-1/3 h-1/4 rounded-3xl text-[20px] font-semibold py-8 whitespace-normal !important;
+    max-width: 75%;
+  }
+}

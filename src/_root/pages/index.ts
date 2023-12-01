@@ -1,0 +1,5 @@
+export { default as Category } from './Category'
+export { default as Setting } from './Setting'
+export { default as Story } from './Story'
+export { default as Home } from './Home'
+export { default as Inputs } from './Inputs'
