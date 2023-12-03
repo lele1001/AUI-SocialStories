@@ -1,8 +1,8 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
 
 @layer base {
   body {
@@ -19,6 +19,21 @@
 
   .storyContainer {
     @apply flex flex-col justify-start items-center bg-white p-5 gap-5 w-465 h-full;
+  }
+
+  .input_text_b {
+    @apply w-1/3 h-72 rounded-2xl rounded-t-none resize-none outline-none text-[20px] text-center font-semibold whitespace-normal;
+    max-width: 75%;
+  }
+
+  .input_text_s {
+    @apply w-1/3 rounded-2xl rounded-t-none resize-none outline-none text-[20px] text-center font-semibold whitespace-normal;
+    max-width: 75%;
+  }
+
+  .input_label {
+    @apply bg-my-blue text-white w-1/3 rounded-2xl rounded-b-none text-[24px] font-semibold flex flex-col flex-center whitespace-normal;
+    max-width: 75%;
   }
 
 }
@@ -123,8 +138,13 @@
     max-width: 75%;
   }
 
+  .submit_button {
+    @apply bg-my-blue text-white w-1/12 rounded-2xl text-[20px] font-semibold py-8 whitespace-normal !important;
+    max-width: 75%;
+  }
+
   .home_button {
-    @apply bg-my-blue text-white w-1/3 h-1/4 rounded-3xl text-[20px] font-semibold py-8 whitespace-normal !important;
+    @apply bg-my-blue text-white w-1/4 h-60 rounded-3xl text-[32px] font-semibold py-8 whitespace-normal !important;
     max-width: 75%;
   }
 }

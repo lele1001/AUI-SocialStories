@@ -5,7 +5,7 @@ const Home = () => {
     const navigate = useNavigate()
 
     return (
-        <div className="flex flex-row flex-center mt-12 gap-6">
+        <div className="flex flex-row flex-center h-full gap-10">
             <Button className="home_button" onClick={() => navigate('inputs')}>Create my own story</Button>
             <Button className="home_button" onClick={() => navigate('category')}>Choose from existing stories</Button>
         </div>
