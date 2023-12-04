@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import { Button } from "@/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
-import { SignUpValidation } from "@/lib/validation"
+import { SignUpValidation } from "@/_auth/forms"
 import { z } from "zod"
 
 const SignUp = () => {
@@ -19,12 +19,12 @@ const SignUp = () => {
       password: '',
     },
   })
- 
+
   async function onSubmit(_values: z.infer<typeof SignUpValidation>) {
     try {
       form.reset();
       navigate("/");
-     
+
     } catch (error) {
       console.log({ error });
     }
@@ -80,7 +80,7 @@ const SignUp = () => {
 
         <p className="subtle-regular">
           Already have an account? <Link to="/log-in" className="subtle-semibold ml-1">Log In</Link>
-          </p>
+        </p>
       </form>
     </Form>
   )

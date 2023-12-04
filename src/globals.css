@@ -145,7 +145,7 @@
   }
 
   .home_button {
-    @apply bg-my-blue text-white w-1/4 h-60 rounded-3xl text-[32px] font-semibold py-8 whitespace-normal !important;
+    @apply bg-my-blue text-white w-1/4 h-60 rounded-3xl text-[32px] leading-[120%] font-semibold py-8 whitespace-normal !important;
     max-width: 75%;
   }
 }
