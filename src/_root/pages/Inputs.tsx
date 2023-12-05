@@ -28,18 +28,18 @@ const Inputs = () => {
       return
     } */
 
-    let path = '/story'
+    let path = '/user-settings'
     navigate(path)
   }
 
   return (
     <form className="flex flex-col flex-center h-full w-full" method="post" onSubmit={handleSubmit}>
-      <label className='input_label'>Insert a training name</label>
-      <textarea className="input_text_s" name='trainingName' defaultValue=""></textarea>
+      <label className='input_label'>STORY TITLE</label>
+      <textarea className="input_text_s" name='trainingName' placeholder="type here the title of your story"></textarea>
       <hr style={{ height: 25 }}/>
 
-      <label className='input_label'>Insert the description</label>
-      <textarea className="input_text_b" name='trainingDesc' defaultValue=""></textarea>
+      <label className='input_label'>STORY DESCRIPTION</label>
+      <textarea className="input_text_b" name='trainingDesc' placeholder="type here a brief description of your story"></textarea>
       <hr style={{ height: 50 }} />
 
       <div className="flex flex-row flex-center w-full gap-6">

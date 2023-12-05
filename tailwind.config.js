@@ -22,7 +22,7 @@ module.exports = {
 
     extend: {
       colors: {
-        'my-yellow': '#FCBF49BF',
+        'my-yellow': '#DFFFFD',
         'my-blue': '#1982C4',
         'my-blue-h': '#1976af',
       },
