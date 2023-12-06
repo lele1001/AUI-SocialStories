@@ -6,64 +6,72 @@ const UserSettings = () => {
 
     async function handleSubmit(e: any) {
         e.preventDefault();
-        const form = e.target;
-        const formData = new FormData(form);
 
-        if (formData.get('trainingName') == '' || formData.get('trainingDesc') == '') {
-            alert('Error: Please fill all the fields')
-            return
+
+        // Accessing selected values for text, images, and speech settings
+        const textSetting = document.querySelector('input[name="text"]:checked');
+        const imagesSetting = document.querySelector('input[name="img"]:checked');
+        const speechSetting = document.querySelector('input[name="spe"]:checked');
+
+        // Checking if all settings are selected
+        if (textSetting && imagesSetting && speechSetting) {
+            // Getting values of selected options
+            const textValue = (textSetting as HTMLInputElement).value;
+            const imagesValue = (imagesSetting as HTMLInputElement).value;
+            const speechValue = (speechSetting as HTMLInputElement).value;
+
+            // Perform actions with the selected values (for example, sending them to the server or processing further)
+            console.log('Text Setting:', textValue);
+            console.log('Images Setting:', imagesValue);
+            console.log('Speech Setting:', speechValue);
+
+            // Function to send data to Python
+            /* try {
+              const nameResp = await axios.post('http://your-python-server/api/endpoint', formJson);
+              console.log(nameResp.data); // Handle the response from Python
+            } catch (error) {
+              console.error('Error sending data:', error);
+              return
+            } */
+
+            const path = '/story'
+            navigate(path)
+        } else {
+            // Display an alert if not all settings are selected
+            alert('Please select settings for Text, Images, and Speech.'); 
         }
-
-        // Or you can work with it as a plain object:
-        const formJson = Object.fromEntries(formData.entries());
-        console.log(formJson);
-
-        // Function to send data to Python
-        /* try {
-          const nameResp = await axios.post('http://your-python-server/api/endpoint', formJson);
-          console.log(nameResp.data); // Handle the response from Python
-        } catch (error) {
-          console.error('Error sending data:', error);
-          return
-        } */
-
-        let path = '/user-settings'
-        navigate(path)
     }
-
 
     return (
         <form className="flex flex-col flex-center h-full w-full" method="post" onSubmit={handleSubmit}>
-            <label className='input_label'>STORY SETTINGS</label>
-            <div className='settings_selection'>
-                <div className='flex-row flex-center gap-44'>
-                    <label className='settings_label'>Text</label>
-                    <label className='settings_label'>
-                        <input type='radio' name='text_yes' value='YES'/>YES
-                    </label>
-                    <label className='settings_label'>
-                        <input type='radio' name='text_no' value='NO' />NO
-                    </label>
+            <div className='sett-table'>
+                <div className='sett-title'><h3>Story Settings</h3></div>
+                <div className='sett-row'>
+                    <div className='sett-col'>Text</div>
+                    <div className='sett-col'>
+                        <input type='radio' name='text' value='YES' />YES
+                    </div>
+                    <div className='sett-col'>
+                        <input type='radio' name='text' value='NO' />NO
+                    </div>
                 </div>
-
-                <div className='flex-row flex-center gap-40'>
-                    <label className='settings_label'>Images</label>
-                    <label className='settings_label'>
-                        <input type='radio' name='img_yes' value='YES' />YES
-                    </label>
-                    <label className='settings_label'>
-                        <input type='radio' name='img_no' value='NO' />NO
-                    </label>
+                <div className='sett-row'>
+                    <div className='sett-col'>Images</div>
+                    <div className='sett-col'>
+                        <input type='radio' name='img' value='YES' />YES
+                    </div>
+                    <div className='sett-col'>
+                        <input type='radio' name='img' value='NO' />NO
+                    </div>
                 </div>
-
-                <div className='flex-row flex-center gap-40'>
-                    <label className='settings_label'>Speech</label>
-                    <label className='settings_label'>
-                        <input type='radio' name='spe_yes' value='YES' />YES
-                    </label>
-                    <label className='settings_label'>
-                        <input type='radio' name='spe_no' value='NO' />NO
-                    </label>
+                <div className='sett-row'>
+                    <div className='sett-col'>Speech</div>
+                    <div className='sett-col'>
+                        <input type='radio' name='spe' value='YES' />YES
+                    </div>
+                    <div className='sett-col'>
+                        <input type='radio' name='spe' value='NO' />NO
+                    </div>
                 </div>
             </div>
             

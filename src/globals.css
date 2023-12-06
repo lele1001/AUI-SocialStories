@@ -33,22 +33,33 @@
     @apply w-1/2 rounded-2xl rounded-t-none resize-none outline-none text-[20px] text-center font-semibold;
   }
 
-  .settings_selection {
-    @apply bg-white flex flex-col flex-center w-1/2 gap-6 p-4 rounded-2xl rounded-t-none text-[20px] text-center font-semibold;
+  .sett-table {
+    @apply flex flex-col w-1/2 text-[24px] text-center;
   }
 
-  .input_label {
-    @apply bg-my-blue text-white w-1/2 rounded-2xl rounded-b-none text-[24px] font-semibold flex flex-col flex-center whitespace-normal;
-    max-width: 75%;
+  .sett-title {
+    @apply bg-my-blue font-bold text-white rounded-t-2xl
   }
 
-  .settings_label {
-    @apply text-[24px] font-semibold;
-    max-width: 75%;
+  .sett-row {
+    @apply bg-white flex flex-row text-center;
+  }
+
+  .sett-row:last-child {
+    @apply rounded-b-2xl;
+  }
+
+  .sett-col {
+    @apply flex-1 p-1 text-center
+  }
+
+  .sett-col input[type='radio'] {
+    @apply pr-1;
   }
 
   .storyText {
     @apply h-5/6 text-[20px] text-center p-2;
+    background-color: white
   }
 }
 
