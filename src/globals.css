@@ -33,6 +33,10 @@
     @apply w-1/2 rounded-2xl rounded-t-none resize-none outline-none text-[20px] text-center font-semibold;
   }
 
+  .input_label {
+    @apply w-1/2 bg-my-blue text-white rounded-2xl rounded-b-none resize-none outline-none text-[20px] text-center font-semibold;
+  }
+
   .sett-table {
     @apply flex flex-col w-1/2 text-[24px] text-center;
   }
