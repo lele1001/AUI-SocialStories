@@ -13,7 +13,9 @@ const Story = () => {
       .then((data) => {
         setParts(data.parts);
         setImages(data.images);
-      })
+      }) 
+
+      // Gives me the following error = Error fetching data: SyntaxError: Unexpected token 'r', "from flask "... is not valid JSON
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
 
