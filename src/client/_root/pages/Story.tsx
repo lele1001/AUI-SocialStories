@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Button } from "@/components/ui/button";
+import { Button } from "@/client/components/ui/button";
 
 const Story = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -20,7 +20,7 @@ const Story = () => {
       .then((data) => {
         setParts(data.parts);
         setImages(data.images);
-      }) 
+      })
 
       // Gives me the following error = 
       // Error fetching data: SyntaxError: Unexpected token 'r', "from flask "... is not valid JSON

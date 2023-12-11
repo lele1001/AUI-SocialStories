@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button'
+import { Button } from '@/client/components/ui/button'
 import { useNavigate } from 'react-router-dom'
 
 const UserSettings = () => {
@@ -38,7 +38,7 @@ const UserSettings = () => {
             navigate(path)
         } else {
             // Display an alert if not all settings are selected
-            alert('Please select settings for Text, Images, and Speech.'); 
+            alert('Please select settings for Text, Images, and Speech.');
         }
     }
 
@@ -74,8 +74,8 @@ const UserSettings = () => {
                     </div>
                 </div>
             </div>
-            
-            <hr style={{height:50}}/>
+
+            <hr style={{ height: 50 }} />
 
             <div className="flex flex-row flex-center w-full gap-6">
                 <Button className="submit_button" type="reset">Clear</Button>

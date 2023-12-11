@@ -1,19 +1,19 @@
-import { Button } from "@/components/ui/button"
-import axios from "axios"
-import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { Button } from "@/client/components/ui/button"
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Setting = () => {
+const Category = () => {
   const [receivedData, setData] = useState([])
   const selectedButton = document.getElementsByClassName('item_button')[0].textContent || ''
   const navigate = useNavigate()
 
   useEffect(() => {
     // Fetch data from Python backend when the component mounts
-    getSetting();
+    getCategories();
   }, [])
 
-  const getSetting = () => {
+  const getCategories = () => {
     // Replace with your Python server endpoint
     axios.get('http://your-python-server/api/data')
       .then(response => {
@@ -27,7 +27,7 @@ const Setting = () => {
   const setCategory = async (choice: string) => {
     // Check if user has selected a category
     if (choice == '') {
-      alert('Error: Please select a setting for the story')
+      alert('Error: Please select a category')
       return
     }
 
@@ -42,7 +42,7 @@ const Setting = () => {
     }
 
     // Navigate to the next page
-    let path = '/story'
+    let path = '/setting'
     navigate(path)
   }
 
@@ -56,4 +56,4 @@ const Setting = () => {
   )
 }
 
-export default Setting
+export default Category

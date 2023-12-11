@@ -11,7 +11,7 @@ api_key = "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"
 openai.api_key = api_key
 
 # Function to append story and character data to the initial_prompt.json file
-@app.route('/src/_root/pages/Inputs.tsx', methods=['POST'])
+@app.route('/append-inputs', methods=['POST'])
 def append_inputs():
     new_data = request.json
 
@@ -30,7 +30,7 @@ def append_inputs():
 
 
 # Function to generate a story based on a given prompt
-@app.route('src/_root/pages/Story.tsx', methods=['GET'])
+@app.route('/generate-story', methods=['GET'])
 def generate_story():
     # Read the existing data from the file
     with open('initial_prompt.json', 'r') as file:
@@ -86,4 +86,4 @@ def generate_story():
     return jsonify({'images': generated_images, 'parts': part_prompts})
 
 if __name__ == '__main__':
-    app.run(port=port)
+    app.run(port=port, debug=True)

@@ -1,4 +1,4 @@
-import TopBar from "@/components/shared/TopBar"
+import TopBar from "@/client/components/shared/TopBar"
 import { Outlet } from "react-router-dom"
 
 const RootLayout = () => {

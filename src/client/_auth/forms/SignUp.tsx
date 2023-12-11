@@ -2,24 +2,25 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Link, useNavigate } from 'react-router-dom'
 
 import { useForm } from "react-hook-form"
-import { Button } from "@/components/ui/button"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { Input } from "@/components/ui/input"
-import { LogInValidation } from "@/_auth/forms"
+import { Button } from "@/client/components/ui/button"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/client/components/ui/form"
+import { Input } from "@/client/components/ui/input"
+import { SignUpValidation } from "@/client/_auth/forms"
 import { z } from "zod"
 
-const LogIn = () => {
+const SignUp = () => {
   const navigate = useNavigate()
 
-  const form = useForm<z.infer<typeof LogInValidation>>({
-    resolver: zodResolver(LogInValidation),
+  const form = useForm<z.infer<typeof SignUpValidation>>({
+    resolver: zodResolver(SignUpValidation),
     defaultValues: {
+      name: "",
       email: '',
       password: '',
     },
   })
 
-  async function onSubmit(_values: z.infer<typeof LogInValidation>) {
+  async function onSubmit(_values: z.infer<typeof SignUpValidation>) {
     try {
       form.reset();
       navigate("/");
@@ -31,8 +32,22 @@ const LogIn = () => {
 
   return (
     <Form {...form}>
-      <h2 className="h3-bold md:h2-bold titleContainer">Log In</h2>
+      <h2 className="h3-bold md:h2-bold titleContainer">Sign Up</h2>
       <form onSubmit={form.handleSubmit(onSubmit)} className="formContainer">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Name</FormLabel>
+              <FormControl>
+                <Input type='text' placeholder="Name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="email"
@@ -64,11 +79,11 @@ const LogIn = () => {
         <Button type="submit" className="button_primary">Submit</Button>
 
         <p className="subtle-regular">
-          Don't have an account? <Link to="/sign-up" className="subtle-semibold ml-1">Sign Up</Link>
+          Already have an account? <Link to="/log-in" className="subtle-semibold ml-1">Log In</Link>
         </p>
       </form>
     </Form>
   )
 }
 
-export default LogIn
+export default SignUp
