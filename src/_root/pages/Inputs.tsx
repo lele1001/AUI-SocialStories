@@ -35,8 +35,8 @@ const Inputs = () => {
 
       if (response.ok) {
         try {
-          const responseData = await response.json();
-          console.log('Success:', responseData.data);
+          const responseData = await response.text();
+          console.log('Success:', responseData);
           // Redirect or perform any action after successful submission
           let path = '/user-settings';
           navigate(path);
