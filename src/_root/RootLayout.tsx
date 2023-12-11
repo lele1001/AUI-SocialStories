@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom"
 
 const RootLayout = () => {
   return (
-    <div className="w-full">
+    <div className="w-full h-fit">
       <TopBar />
       <Outlet />
     </div>

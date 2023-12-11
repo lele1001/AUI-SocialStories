@@ -22,7 +22,7 @@
   }
 
   .storyContainer {
-    @apply flex flex-col justify-start items-center bg-white p-5 gap-5 w-1/4 h-full;
+    @apply flex flex-col justify-start items-center bg-white p-5 gap-5 w-auto h-full;
   }
 
   .input_text_b {
@@ -63,7 +63,8 @@
 
   .storyText {
     @apply h-5/6 text-[20px] text-center p-2;
-    background-color: white
+    background-color: white;
+    min-height: 300px;
   }
 }
 
@@ -173,7 +174,7 @@
   }
 
   .home_button {
-    @apply bg-my-blue text-white w-1/4 h-60 rounded-3xl text-[32px] leading-[120%] font-semibold py-8 whitespace-normal !important;
+    @apply bg-my-blue text-white my-10 w-1/4 h-40 rounded-3xl text-[28px] leading-[120%] font-semibold py-8 whitespace-normal !important;
     max-width: 75%;
   }
 }
