@@ -26,8 +26,7 @@ def append_inputs():
     with open('initial_prompt.json', 'w') as file:
         json.dump(initial_prompt_data, file, indent=2)
 
-    print(initial_prompt_data)
-    return 'Data added successfully', 200
+    return jsonify({'message': 'Data added successfully', 'data': new_data}), 200
 
 
 # Function to generate a story based on a given prompt
@@ -38,6 +37,7 @@ def generate_story():
         prompt = json.load(file)
 
     prompt.append({"role": "user", "content": "START"})
+    print(prompt)
 
     chat = ChatCompletion.create(
         model="gpt-4",

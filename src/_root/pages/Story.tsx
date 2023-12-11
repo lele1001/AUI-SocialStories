@@ -9,13 +9,21 @@ const Story = () => {
   useEffect(() => {
     // Fetch data from the Python Flask backend
     fetch('/src/storyGeneration.py')
-      .then((response) => response.json())
+      .then((response) => {
+        // Check if the response is valid (status code 200-299)
+        if (response.ok) {
+          return response.json(); // Parse the JSON content
+        } else {
+          throw new Error('Network response was not ok.');
+        }
+      })
       .then((data) => {
         setParts(data.parts);
         setImages(data.images);
       }) 
 
-      // Gives me the following error = Error fetching data: SyntaxError: Unexpected token 'r', "from flask "... is not valid JSON
+      // Gives me the following error = 
+      // Error fetching data: SyntaxError: Unexpected token 'r', "from flask "... is not valid JSON
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
 

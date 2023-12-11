@@ -34,12 +34,18 @@ const Inputs = () => {
       });
 
       if (response.ok) {
-        console.log('Success:', newData);
-        // Redirect or perform any action after successful submission
-        let path = '/user-settings';
-        navigate(path);
+        try {
+          const responseData = await response.json();
+          console.log('Success:', responseData.data);
+          // Redirect or perform any action after successful submission
+          let path = '/user-settings';
+          navigate(path);
+        } catch (error) {
+          console.error('Error parsing JSON:', error);
+        }
       } else {
-        throw new Error('Failed to submit data');
+        console.error('Server responded with an error:', response.statusText);
+        alert('Failed to submit data. Please try again.');
       }
     } catch (error) {
       console.error('Error:', error);
