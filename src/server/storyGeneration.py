@@ -1,10 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import json
 import openai
 from openai import ChatCompletion, Image
 
 app = Flask(__name__)
 port = 3000
+CORS(app)
 
 # Set up your OpenAI API keys
 api_key = "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"
@@ -30,29 +32,40 @@ def append_inputs():
 
 
 # Function to generate a story based on a given prompt
-@app.route('/generate-story', methods=['GET'])
+@app.route('/generate-story', methods=['POST'])
 def generate_story():
     # Read the existing data from the file
+    prompt = [0,1,2]
     with open('initial_prompt.json', 'r') as file:
-        prompt = json.load(file)
+        prompt[0] = json.load(file)
+        prompt[1] = {"role": "user", "content": request.get_json(force=True)['character']}
+        prompt[2]={}
+        prompt[2]["role"]="user"
+        prompt[2]["content"]="START"
 
-    prompt.append({"role": "user", "content": "START"})
-    print(prompt)
+    # prompt.append({"role": "user", "content": "START"})
+    # prompt[0]["role"]="user"
+    # prompt[0]["content"]="START"
+    # print(prompt)
 
     chat = ChatCompletion.create(
         model="gpt-4",
         messages=prompt
     )
 
+    # print("resp: ",chat.choices[0].message.content)
     # Return the generated story as a JSON response
-    story = jsonify({'story': chat.choices[0].message.content})
+    story = json.dumps(chat.choices[0].message.content)
 
     images = []  # Store generated images
     part_prompts = []  # Store prompts related to parts
 
+    # print("story: ", story)
     # Extracting image prompts and part descriptions
-    messages = story.split('\n')
+    messages = story.split('\\n')
     for message in messages:
+        message = message.replace('"',"")
+        print("mess: ",message,"\n")
         if message.startswith("Image"):
             image_description = message.split(":")[1].strip()
             images.append(image_description)

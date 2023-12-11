@@ -22,7 +22,7 @@
 	}
 
 	.storyContainer {
-		@apply flex flex-col justify-start items-center bg-white p-5 gap-5 w-auto h-full;
+		@apply flex flex-col justify-start items-center bg-white p-5 gap-5 basis-0 h-full;
 	}
 
 	.input_text_b {
