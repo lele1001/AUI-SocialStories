@@ -7,35 +7,25 @@ const UserSettings = () => {
     async function handleSubmit(e: any) {
         e.preventDefault();
 
-
         // Accessing selected values for text, images, and speech settings
         const textSetting = document.querySelector('input[name="text"]:checked');
         const imagesSetting = document.querySelector('input[name="img"]:checked');
-        const speechSetting = document.querySelector('input[name="spe"]:checked');
+        // const speechSetting = document.querySelector('input[name="spe"]:checked');
 
         // Checking if all settings are selected
-        if (textSetting && imagesSetting && speechSetting) {
+        if (textSetting && imagesSetting) {
             // Getting values of selected options
             const textValue = (textSetting as HTMLInputElement).value;
             const imagesValue = (imagesSetting as HTMLInputElement).value;
-            const speechValue = (speechSetting as HTMLInputElement).value;
+            // const speechValue = (speechSetting as HTMLInputElement).value;
 
             // Perform actions with the selected values (for example, sending them to the server or processing further)
-            console.log('Text Setting:', textValue);
-            console.log('Images Setting:', imagesValue);
-            console.log('Speech Setting:', speechValue);
+            console.log('Settings: text ', textValue, ', images ', imagesValue);
+            localStorage.setItem('text', textValue);
+            localStorage.setItem('images', imagesValue);
+            // localStorage.setItem('speech', speechValue);
 
-            // Function to send data to Python
-            /* try {
-              const nameResp = await axios.post('http://your-python-server/api/endpoint', formJson);
-              console.log(nameResp.data); // Handle the response from Python
-            } catch (error) {
-              console.error('Error sending data:', error);
-              return
-            } */
-
-            const path = '/story'
-            navigate(path)
+            navigate('/inputs')
         } else {
             // Display an alert if not all settings are selected
             alert('Please select settings for Text, Images, and Speech.');
@@ -67,10 +57,10 @@ const UserSettings = () => {
                 <div className='sett-row'>
                     <div className='sett-col'>Speech</div>
                     <div className='sett-col'>
-                        <input type='radio' name='spe' value='YES' />YES
+                        <input type='radio' name='spe' value='YES' disabled={true} />YES
                     </div>
                     <div className='sett-col'>
-                        <input type='radio' name='spe' value='NO' />NO
+                        <input type='radio' name='spe' value='NO' disabled={true} />NO
                     </div>
                 </div>
             </div>

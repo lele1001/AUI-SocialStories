@@ -1,34 +1,19 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/client/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 const Story = () => {
+	const navigate = useNavigate();
 	const [currentIndex, setCurrentIndex] = useState(0);
 	const [parts, setParts] = useState([]);
 	const [images, setImages] = useState([]);
 
 	useEffect(() => {
-		// Fetch data from the Python Flask backend
-		// fetch("http://localhost:3000/append-inputs")
-		// 	.then((response) => {
-		// 		// Check if the response is valid (status code 200-299)
-		// 		if (response.ok) {
-		// 			return response.json(); // Parse the JSON content
-		// 		} else {
-		// 			throw new Error("Network response was not ok.");
-		// 		}
-		// 	})
-		// 	.then((data) => {
-		// 		setParts(data.parts);
-		// 		setImages(data.images);
-		// 	})
-
-		// 	// Gives me the following error =
-		// 	// Error fetching data: SyntaxError: Unexpected token 'r', "from flask "... is not valid JSON
-		// 	.catch((error) => console.error("Error fetching data:", error));
 		let story = JSON.parse(localStorage.getItem("story") || "") as {
 			images: [];
 			parts: [];
 		};
+
 		setImages(story["images"]);
 		setParts(story["parts"]);
 	}, []);
@@ -36,6 +21,9 @@ const Story = () => {
 	const handleNext = () => {
 		if (currentIndex < parts.length - 1) {
 			setCurrentIndex(currentIndex + 1);
+		} 
+		else if (currentIndex == parts.length - 1) {
+			navigate('/');
 		}
 	};
 

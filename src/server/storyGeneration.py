@@ -1,3 +1,4 @@
+import re
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
@@ -12,60 +13,33 @@ CORS(app)
 api_key = "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"
 openai.api_key = api_key
 
-# Function to append story and character data to the initial_prompt.json file
-@app.route('/append-inputs', methods=['POST'])
-def append_inputs():
-    new_data = request.json
-
-    # Read the existing data from the file
-    with open('initial_prompt.json', 'r') as file:
-        initial_prompt_data = json.load(file)
-
-    # Append the new data
-    initial_prompt_data.append(new_data)
-
-    # Write the updated data back to the file
-    with open('initial_prompt.json', 'w') as file:
-        json.dump(initial_prompt_data, file, indent=2)
-
-    return jsonify({'message': 'Data added successfully', 'data': new_data}), 200
-
-
 # Function to generate a story based on a given prompt
 @app.route('/generate-story', methods=['POST'])
 def generate_story():
     # Read the existing data from the file
-    prompt = [0,1,2]
-    with open('initial_prompt.json', 'r') as file:
+    prompt = [0, 1, 2]
+    with open('src/server/initial_prompt.json', 'r') as file:
         prompt[0] = json.load(file)
-        prompt[1] = {"role": "user", "content": request.get_json(force=True)['character']}
+        prompt[1] = {"role": "user", "content": request.get_json(force=True)['character'] + request.get_json(force=True)['scene']}
         prompt[2]={}
         prompt[2]["role"]="user"
         prompt[2]["content"]="START"
-
-    # prompt.append({"role": "user", "content": "START"})
-    # prompt[0]["role"]="user"
-    # prompt[0]["content"]="START"
-    # print(prompt)
 
     chat = ChatCompletion.create(
         model="gpt-4",
         messages=prompt
     )
 
-    # print("resp: ",chat.choices[0].message.content)
     # Return the generated story as a JSON response
     story = json.dumps(chat.choices[0].message.content)
 
     images = []  # Store generated images
     part_prompts = []  # Store prompts related to parts
 
-    # print("story: ", story)
     # Extracting image prompts and part descriptions
     messages = story.split('\\n')
     for message in messages:
         message = message.replace('"',"")
-        print("mess: ",message,"\n")
         if message.startswith("Image"):
             image_description = message.split(":")[1].strip()
             images.append(image_description)
@@ -73,6 +47,10 @@ def generate_story():
             part_content = message.split(":")[1].strip()
             part_prompts.append(part_content)
 
+    if request.get_json(force=True)['txtOnly'] == True:
+        return jsonify({'parts': part_prompts})
+
+  
     # Generating images using DALL-E
     generated_images = []
     for index, description in enumerate(images, start=1):

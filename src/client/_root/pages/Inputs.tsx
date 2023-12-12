@@ -23,6 +23,7 @@ const Inputs = () => {
 		const newData = {
 			character: "Character: " + character,
 			scene: "Scene: " + scene,
+			txtOnly: localStorage.getItem("images") == "NO" ? true : false
 		};
 
 		try {
@@ -33,15 +34,21 @@ const Inputs = () => {
 				},
 				body: JSON.stringify(newData),
 			});
+
 			console.log(response);
+
 			if (response.status == 200) {
 				try {
 					const responseData = await response.json();
 					console.log("Success:", responseData);
 					localStorage.setItem("story", JSON.stringify(responseData));
 					// Redirect or perform any action after successful submission
-					let path = "/user-settings";
-					navigate(path);
+					
+					if (localStorage.getItem("images") == "YES") {
+						navigate("/story-txt-img");
+					} else {
+						navigate("/story-txt");
+					}
 				} catch (error) {
 					console.error("Error parsing JSON:", error);
 				}
@@ -63,7 +70,7 @@ const Inputs = () => {
 		>
 			<label className="input_label">STORY CHARACTER</label>
 			<textarea
-				className="input_text_s"
+				className="input_text_b"
 				name="trainingName"
 				placeholder="type here the character description"
 				value={character}
