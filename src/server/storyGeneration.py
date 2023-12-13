@@ -30,12 +30,27 @@ def save_prompt():
     if title in existingStories:
         existingStories[title].append(newStory)
     else:
-        existingStories[title] = [newStory]
+        existingStories[title] = newStory
 
     with open('src/server/inputs.json', 'w') as file:
         json.dump(existingStories, file, indent=4)
 
     return jsonify({'success': True})
+
+@app.route('/load-prompt', methods=['POST'])
+def load_prompt():
+    # Load the character and scene from a file
+    title = request.get_json(force=True)['title']
+
+    with open('src/server/inputs.json', 'r') as file:
+        existingStories = json.load(file)
+
+    if title in existingStories:
+        return jsonify({'success': True, 'character': existingStories[title][0]["Character"], 'scene': existingStories[title][0]["Scene"]})
+    else:
+        return jsonify({'success': False})
+
+
 
 # Function to generate a story based on a given prompt
 @app.route('/generate-story', methods=['POST'])
