@@ -13,17 +13,49 @@ CORS(app)
 api_key = "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"
 openai.api_key = api_key
 
+# Function to save character and scene to a file
+@app.route('/save-prompt', methods=['POST'])
+def save_prompt():
+    # Save the character and scene to a file
+    title = request.get_json(force=True)['title']
+
+    newStory = {
+        "Character": request.get_json(force=True)['character'],
+        "Scene": request.get_json(force=True)['scene']
+    }
+
+    try: 
+        with open('src/server/input.json', 'r') as file:
+            existingStories = json.load(file)
+    except:
+        existingStories = {}
+
+    existingStories[title] = newStory
+
+    with open('src/server/inputs.json', 'w') as file:
+        json.dump(existingStories, file, indent=4)
+
+    return jsonify({'success': True})
+
 # Function to generate a story based on a given prompt
 @app.route('/generate-story', methods=['POST'])
 def generate_story():
-    # Read the existing data from the file
-    prompt = [0, 1, 2]
-    with open('src/server/initial_prompt.json', 'r') as file:
-        prompt[0] = json.load(file)
-        prompt[1] = {"role": "user", "content": request.get_json(force=True)['character'] + request.get_json(force=True)['scene']}
-        prompt[2]={}
-        prompt[2]["role"]="user"
-        prompt[2]["content"]="START"
+    # Read the existing data from the files
+    prompt = [0, 1, 2, 3]
+    
+    with open('src/server/initial_prompt.json', 'r', encoding='utf-8') as file:
+        myFile = json.load(file)
+
+    prompt[0] = myFile["first"]
+    prompt[1] = myFile["second"]
+
+    prompt[2] = {
+        "role": "user", 
+        "content": request.get_json(force=True)['character'] + request.get_json(force=True)['scene'] + '\n Remember to keep any mention of the main character out of the images.'}
+    
+    prompt[3]={
+        "role":"user", 
+        "content":"START"}
 
     chat = ChatCompletion.create(
         model="gpt-4",

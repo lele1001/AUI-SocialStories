@@ -21,6 +21,7 @@ const Story = () => {
 			setCurrentIndex(currentIndex + 1);
 		} 
 		else if (currentIndex == parts.length - 1) {
+			document.getElementById("next")!.textContent = "Finish";
 			navigate('/');
 		}
 	};
@@ -35,10 +36,10 @@ const Story = () => {
 		<div className="flex flex-col h-full items-center gap-4">
 				<div className="story">{parts[currentIndex]}</div>
 				<div className="flex flex-row flex-center w-full gap-6">
-					<Button className="button_primary" onClick={handlePrevious}>
+					<Button id="prev" className="button_primary" onClick={handlePrevious}>
 						Previous
 					</Button>
-					<Button className="button_primary" onClick={handleNext}>
+					<Button id="next" className="button_primary" onClick={handleNext}>
 						Next
 					</Button>
 				</div>

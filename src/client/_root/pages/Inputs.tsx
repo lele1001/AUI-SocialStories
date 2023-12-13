@@ -6,6 +6,7 @@ const Inputs = () => {
 	const navigate = useNavigate();
 	const [character, setCharacter] = useState("");
 	const [scene, setStoryDescription] = useState("");
+	const [title, setTitle] = useState("");
 
 	async function handleSubmit(e: any) {
 		e.preventDefault();
@@ -13,6 +14,7 @@ const Inputs = () => {
 		const formData = new FormData(form);
 
 		if (
+			formData.get("storyName") == "" ||
 			formData.get("trainingName") == "" ||
 			formData.get("trainingDesc") == ""
 		) {
@@ -21,13 +23,16 @@ const Inputs = () => {
 		}
 
 		const newData = {
+			title: title,
 			character: "Character: " + character,
 			scene: "Scene: " + scene,
-			txtOnly: localStorage.getItem("images") == "NO" ? true : false
 		};
 
+		localStorage.setItem("character", newData.character);
+		localStorage.setItem("scene", newData.scene);
+
 		try {
-			const response = await fetch("http://localhost:3000/generate-story", {
+			const response = await fetch("http://localhost:3000/save-prompt", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
@@ -35,20 +40,14 @@ const Inputs = () => {
 				body: JSON.stringify(newData),
 			});
 
+			alert("Data submitted successfully");
 			console.log(response);
 
 			if (response.status == 200) {
 				try {
 					const responseData = await response.json();
 					console.log("Success:", responseData);
-					localStorage.setItem("story", JSON.stringify(responseData));
-					// Redirect or perform any action after successful submission
-					
-					if (localStorage.getItem("images") == "YES") {
-						navigate("/story-txt-img");
-					} else {
-						navigate("/story-txt");
-					}
+					navigate("/loading");
 				} catch (error) {
 					console.error("Error parsing JSON:", error);
 				}
@@ -68,6 +67,16 @@ const Inputs = () => {
 			method="post"
 			onSubmit={handleSubmit}
 		>
+			<label className="input_label">STORY TITLE</label>
+			<textarea
+				className="input_text_b"
+				name="storyName"
+				placeholder="type here the title of the story"
+				value={title}
+				onChange={(e) => setTitle(e.target.value)}
+			></textarea>
+			<hr style={{ height: 25 }} />
+
 			<label className="input_label">STORY CHARACTER</label>
 			<textarea
 				className="input_text_b"
