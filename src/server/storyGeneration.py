@@ -24,13 +24,13 @@ def save_prompt():
         "Scene": request.get_json(force=True)['scene']
     }
 
-    try: 
-        with open('src/server/input.json', 'r') as file:
-            existingStories = json.load(file)
-    except:
-        existingStories = {}
+    with open('src/server/input.json', 'r') as file:
+        existingStories = json.load(file)
 
-    existingStories[title] = [newStory]
+    if title in existingStories:
+        existingStories[title].append(newStory)
+    else:
+        existingStories[title] = [newStory]
 
     with open('src/server/inputs.json', 'w') as file:
         json.dump(existingStories, file, indent=4)

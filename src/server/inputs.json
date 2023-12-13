@@ -1,6 +1,8 @@
 {
-    "New school": {
-        "Character": "Character: Alice is 11 years old. She is blonde and tall",
-        "Scene": "Scene: Tomorrow is Alice's first day at high school and she needs suggestions on how to make a new friend"
-    }
+    "The dentist": [
+        {
+            "Character": "Character: I am autistic and I am 13 years old",
+            "Scene": "Scene: I need to go to the dentist but I don't like being in places with a lot of people"
+        }
+    ]
 }
