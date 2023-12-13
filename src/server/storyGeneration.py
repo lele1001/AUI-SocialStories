@@ -30,7 +30,7 @@ def save_prompt():
     except:
         existingStories = {}
 
-    existingStories[title] = newStory
+    existingStories[title] = [newStory]
 
     with open('src/server/inputs.json', 'w') as file:
         json.dump(existingStories, file, indent=4)
