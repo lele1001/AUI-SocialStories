@@ -1,8 +1,11 @@
 {
-    "The dentist": [
+    "The dentist":
         {
             "Character": "Character: I am autistic and I am 13 years old",
             "Scene": "Scene: I need to go to the dentist but I don't like being in places with a lot of people"
-        }
-    ]
+        },
+    "Washing hands": {
+        "Character": "Character: Tom is a 14 years old boy. He is tall, has blond hair and blue eyes",
+        "Scene": "Scene: Tom needs to learn how to wash his hands properly"
+    }
 }

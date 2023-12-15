@@ -24,7 +24,7 @@ def save_prompt():
         "Scene": request.get_json(force=True)['scene']
     }
 
-    with open('src/server/input.json', 'r') as file:
+    with open('src/server/inputs.json', 'r') as file:
         existingStories = json.load(file)
 
     if title in existingStories:
@@ -50,7 +50,13 @@ def load_prompt():
     else:
         return jsonify({'success': False})
 
+@app.route('/get-titles', methods=['GET'])
+def get_titles():
+    # Load the character and scene from a file
+    with open('src/server/inputs.json', 'r') as file:
+        existingStories = json.load(file)
 
+    return jsonify({'success': True, 'titles': list(existingStories.keys())})
 
 # Function to generate a story based on a given prompt
 @app.route('/generate-story', methods=['POST'])

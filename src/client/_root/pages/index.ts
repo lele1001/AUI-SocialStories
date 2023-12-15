@@ -1,5 +1,4 @@
 export { default as Category } from './Category'
-export { default as Setting } from './Setting'
 export { default as StoryTxtImg } from './StoryTxtImg'
 export { default as StoryTxt } from './StoryTxt'
 export { default as Home } from './Home'

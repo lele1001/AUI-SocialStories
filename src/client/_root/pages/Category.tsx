@@ -1,59 +1,66 @@
-import { Button } from "@/client/components/ui/button"
-import axios from "axios";
+import { Button } from "@/client/components/ui/button";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+interface StoryTitle {
+  scene: string;
+  character: string;
+}
+
 const Category = () => {
-  const [receivedData, setData] = useState([])
-  const selectedButton = document.getElementsByClassName('item_button')[0].textContent || ''
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const [storyTitles, setStoryTitles] = useState<StoryTitle[]>([]);
 
   useEffect(() => {
-    // Fetch data from Python backend when the component mounts
-    getCategories();
-  }, [])
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/get-titles", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
 
-  const getCategories = () => {
-    // Replace with your Python server endpoint
-    axios.get('http://your-python-server/api/data')
-      .then(response => {
-        setData(response.data); // Update state with received data
-      })
-      .catch(error => {
-        console.error('There was a problem fetching data:', error);
-      });
-  }
+        if (response.status === 200) {
+          try {
+            const { titles } = await response.json();
+            setStoryTitles(titles);
+          } catch (error) {
+            console.error("Error parsing JSON:", error);
+          }
+        } else {
+          console.error("Server responded with an error:", response.statusText);
+          alert("Failed to retrieve data. Please try again.");
+          navigate("/");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Failed to load data. Please try again.");
+        navigate("/");
+      }
+    };
 
-  const setCategory = async (choice: string) => {
-    // Check if user has selected a category
-    if (choice == '') {
-      alert('Error: Please select a category')
-      return
-    }
+    fetchData();
+  }, [navigate]);
 
-    // Function to send data to Python
-    try {
-      const response = await axios.post('http://your-python-server/api/endpoint', choice);
-      // Handle the response from Python
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error sending data:', error);
-      return
-    }
+  const handleButtonClick = (title: any) => {
+    localStorage.setItem("scene", storyTitles[title].scene);
+    localStorage.setItem("character", storyTitles[title].character);
+    
+    console.log("Success");
+    navigate("/loading");
+  };
 
-    // Navigate to the next page
-    let path = '/setting'
-    navigate(path)
-  }
 
   return (
     <div className="flex flex-col flex-center mt-12 gap-6">
-      {/* Mapping over the received data to create buttons */}
-      {receivedData.map((item, index) => (
-        <Button key={index} className="item_button" onClick={() => setCategory(selectedButton)}>{item}</Button>
+      {storyTitles.map((title, index) => (
+        <Button key={index} className="item_button" onClick={() => handleButtonClick(title)}>
+            {title.toString()}
+        </Button>
       ))}
     </div>
-  )
-}
+  );
+};
 
-export default Category
+export default Category;

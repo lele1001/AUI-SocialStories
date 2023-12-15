@@ -25,7 +25,11 @@ const UserSettings = () => {
             localStorage.setItem('images', imagesValue);
             // localStorage.setItem('speech', speechValue);
 
-            navigate('/inputs')
+            if (localStorage.getItem('where') == 'create')
+                navigate('/inputs')
+            else
+                navigate('/category')
+
         } else {
             // Display an alert if not all settings are selected
             alert('Please select settings for Text, Images, and Speech.');
