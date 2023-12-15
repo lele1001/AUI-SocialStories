@@ -44,9 +44,7 @@ const Category = () => {
   }, [navigate]);
 
   const handleButtonClick = (title: any) => {
-    localStorage.setItem("scene", storyTitles[title].scene);
-    localStorage.setItem("character", storyTitles[title].character);
-    
+    console.log(storyTitles[title]);
     console.log("Success");
     navigate("/loading");
   };
