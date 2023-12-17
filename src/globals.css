@@ -2,19 +2,225 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+html {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	--txt-blue: #1982C4;
+	--bg-blue: #DFFFFD;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--bg-blue);
+	font-family: "Inter", sans-serif;
+	color: var(--txt-blue);
+	font-size: 20px;
+}
+
+body {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+textarea {
+	resize: none;
+}
+
+textarea:focus {
+	outline: none;
+}
+
+:root {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;	
+	border: 0;
+} 
+
+
+::placeholder {
+	color: lightgrey;
+}
+
+.container {
+	height: inherit;
+	width: inherit;
+	display: flex;
+	flex-direction: row;
+	min-height: 60vh;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+}
+
+.container-v {
+	height: inherit;
+	width: inherit;
+	display: flex;
+	flex-direction: column;
+	min-height: 60vh;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	align-items: center;
+}
+
+.side-bar {
+	height: inherit;
+	background-color: white;
+	color: var(--txt-blue);
+	min-width: 30%;
+	max-width: 30%;
+	padding: 16px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: column;
+}
+
+.top-bar {
+	width: 100%;
+	padding: 16px;
+	padding-left: 40px;
+	padding-right: 40px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	align-content: center;
+	flex-wrap: nowrap;
+	flex-direction: row;
+}
+
+.top-bar-col {
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+}
+
+.logo {
+	flex: 1;
+	max-width: 10%;
+}
+
+.title {
+	flex: 5;
+	font-size: 62px;
+	font-weight: bold;
+}
+
+.exit {
+	flex: 1;
+	max-width: 10%;
+	min-height: 100%;
+	background-color: var(--txt-blue);
+	color: white;
+	border-radius: 10px;
+	font-weight: bold;
+	font-size: 24px;
+	padding: 4px;
+}
+
+.sett-form {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	text-align: center;
+	justify-items: center;
+	align-items: center;
+	padding: 30px;
+	padding-top: 60px;
+}
+
+.sett-table {
+	text-align: center;
+	padding-bottom: 40px;
+	min-width: 80%;
+}
+
+.sett-title {
+	color: white;
+	background-color: var(--txt-blue);
+	font-size: 28px;
+	font-weight: bold;
+	border-start-start-radius: 15px;
+	border-start-end-radius: 15px;
+	padding-top: 4px;
+	padding-bottom: 4px;
+}
+
+.sett-row {
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	justify-items: center;
+	padding: 10px;
+	background-color: white
+}
+
+.sett-row td:first-child {
+	padding: 5px;
+	padding-right: 10px;
+}
+
+.sett-row:last-child {
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+.sett-col {
+	flex: 1;
+}
+
+.save-button {
+	min-width: 30%;
+	max-width: 50%;
+	min-height: 15%;
+	background-color: var(--txt-blue);
+	color: white;
+	border-radius: 12px;
+	font-size: 24px;
+	padding: 20px;
+	margin: 20px;
+}
+
+.user-col {
+	text-align: center;
+	border: 1px solid var(--txt-blue);
+	border-radius: 10px;
+	margin-right: 32px;
+}
+
+.story-col {
+	text-align: center;
+	border: 1px solid var(--txt-blue);
+	border-radius: 10px;
+	margin-right: 16px;
+	width: 65%;
+}
+
+.stories {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	text-align: center;
+	justify-items: center;
+	align-items: center;
+	padding: 30px;
+	padding-top: 60px;
+}
+
 
 @layer base {
-	body {
-		@apply bg-my-yellow text-my-blue min-h-screen font-inter;
-	}
-
-	::placeholder {
-		@apply text-gray-400;
-	}
 
 	.titleContainer {
 		@apply flex flex-col justify-center items-center bg-my-blue text-white rounded-2xl max-h-3 p-8 w-80 mb-1;
+	}
+
+	.content-crop {
+		@apply max-w-sm ;
 	}
 
 	.formContainer {
@@ -22,7 +228,7 @@
 	}
 
 	.storyContainer {
-		@apply flex flex-col justify-start items-center bg-white p-5 gap-5 basis-0 h-full;
+		@apply flex flex-col justify-start items-center bg-white p-5 gap-5 basis-0 min-h-fit;
 	}
 
 	.input_text_b {
@@ -37,30 +243,9 @@
 		@apply w-1/2 bg-my-blue text-white rounded-2xl rounded-b-none resize-none outline-none text-[20px] text-center font-semibold;
 	}
 
-	.sett-table {
-		@apply flex flex-col w-1/2 text-[24px] text-center;
-	}
+	
 
-	.sett-title {
-		@apply bg-my-blue font-bold text-white rounded-t-2xl;
-	}
-
-	.sett-row {
-		@apply bg-white flex flex-row text-center;
-	}
-
-	.sett-row:last-child {
-		@apply rounded-b-2xl;
-	}
-
-	.sett-col {
-		@apply flex-1 p-1 text-center;
-	}
-
-	.sett-col input[type="radio"] {
-		@apply pr-1;
-	}
-
+	
 	.story {
 		@apply flex flex-col justify-center w-2/3 text-[20px] text-center p-4 px-8 ;
 		background-color: white;
@@ -147,14 +332,6 @@
 
 	.flex-end {
 		@apply flex justify-center items-end;
-	}
-
-	.top-bar {
-		@apply flex items-center w-full p-4 px-10;
-	}
-
-	.t-title {
-		@apply top-bar justify-center;
 	}
 
 	.select-bar {

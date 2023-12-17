@@ -1,15 +1,14 @@
-import { Link } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Button } from "../ui/button"
 
 const TopBar = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="top-bar">
-      <img className="logo" src="src\media\logo\LogoNoBackground.png" alt="logo" style={{ maxHeight: 150 }} />
-      <h1 className="h1-bold t-title">Social Stories</h1>
-
-      <Link to='/'>
-        <Button type='submit' className="button_primary">EXIT</Button>
-      </Link>
+      <img className="top-bar-col logo" src="src\media\logo\LogoNoBackground.png" alt="logo" />
+      <h1 className="top-bar-col title">Social Stories</h1>
+      <Button type='submit' className="top-bar-col exit" onClick={() => navigate('/')}>EXIT</Button>
     </section>
   )
 }

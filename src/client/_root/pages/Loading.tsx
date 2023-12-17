@@ -39,12 +39,12 @@ const Inputs = () => {
 				} else {
 					console.error("Server responded with an error:", response.statusText);
 					alert("Failed to submit data. Please try again.");
-					navigate("/inputs");
+					navigate("/");
 				}
 			} catch (error) {
 				console.error("Error:", error);
 				alert("Failed to load data. Please try again.");
-				navigate("/inputs");
+				navigate("/");
 			}
 		};
 

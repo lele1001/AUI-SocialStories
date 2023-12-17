@@ -1,13 +1,11 @@
 {
 	"first": {
 		"role": "user",
-		"content": "I want you to generate an appropriate social story based on age and scenario. I will give you a character profile and the scenario, and I want you to generate the story when I type “START”. Here are the rules:\n 1. I want to generate images for our story with DALL.E so along the story you should give me indicated image descriptions that need to be fed to DALL.E to get the images of our story. I will give you rules for DALL.E in next prompt.\n 2. Each text part must contain more than 25 but less than 70 words.\n 3. The format of the whole story should be similar to example below:\n Image 1: [prompt for image 1] in simplified Gustav Klimt style \n Part 1: [part of story related to image 1]. \n Use this format for next images and parts and replace the brackets with appropriate text (the “in simplified Gustav Klimt style” will remain the same in all images)\n 4.You will give the whole story (multiple images and parts, minumum 3, maximum 5) to me in one prompt after I type “START”"
+		"content": "I want you to generate an appropriate social story based on age and scenario. I will give you a character profile and the scenario, and I want you to generate the story when I type “START”. Here are the rules:\n 1. I want to generate images for our story with DALL.E so along the story you should give me indicated image descriptions that need to be fed to DALL.E to get the images of our story. I will give you rules for DALL.E in next prompt.\n 2. Each text part must contain more than 25 but less than 70 words.\n 3. The format of the whole story should be similar to example below:\n Image 1: [prompt for image 1] in Toy Story style \n Part 1: [part of story related to image 1]. \n Use this format for next images and parts and replace the brackets with appropriate text (the “in Toy Story style” will remain the same in all images)\n 4.You will give the whole story (multiple images and parts, minumum 3, maximum 5) to me in one prompt after I type “START”"
 	},
 
 	"second": {
 		"role": "user",
-		"content": "Here are rules of image prompt:\n 1. Keep any mention of main character out of images (this includes name, picture, body parts, reflection in mirror, etc.)\n 2. If there is a need to mention a interaction between the main character and an object (example: main character sitting on a wooden chair) just give the description of the object without the character. (example: an empty old wooden chair)\n 3. Side characters (any character beside the main one) can only be mentioned in one image."
+		"content": "Here are rules of image prompt:\n 1. If there is a need to mention a interaction between the main character and an object (example: main character sitting on a wooden chair) just give the description of the object without the character. (example: an empty old wooden chair)\n 2. Side characters (any character beside the main one) can only be mentioned in one image."
 	}
 }
-
-

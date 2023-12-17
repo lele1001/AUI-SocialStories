@@ -21,9 +21,9 @@ const Story = () => {
 	const handleNext = () => {
 		if (currentIndex < parts.length - 1) {
 			setCurrentIndex(currentIndex + 1);
-		} 
+		}
 		else if (currentIndex == parts.length - 1) {
-			document.getElementById("next")!.textContent = "Finish";
+			document.getElementById("next")!.innerHTML = "Finish";
 			navigate('/');
 		}
 	};

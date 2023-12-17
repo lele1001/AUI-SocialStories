@@ -13,50 +13,51 @@ CORS(app)
 api_key = "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"
 openai.api_key = api_key
 
-# Function to save character and scene to a file
-@app.route('/save-prompt', methods=['POST'])
-def save_prompt():
-    # Save the character and scene to a file
-    title = request.get_json(force=True)['title']
+# Function to save the user data to a JSON file
+@app.route('/user-data', methods=['POST'])
+def user_data():
+    if request.method == 'POST':
+        data = request.get_json()
 
-    newStory = {
-        "Character": request.get_json(force=True)['character'],
-        "Scene": request.get_json(force=True)['scene']
-    }
+        with open('useInfo.json', 'w') as file:
+            json.dump(data, file, indent=4)
 
-    with open('src/server/inputs.json', 'r') as file:
-        existingStories = json.load(file)
+        return jsonify({'message': 'User data saved successfully'})
 
-    if title in existingStories:
-        existingStories[title].append(newStory)
-    else:
-        existingStories[title] = newStory
+# Function to read stories from the JSON file
+def get_stories():
+    with open('stories.json', 'r') as file:
+        return json.load(file)
 
-    with open('src/server/inputs.json', 'w') as file:
-        json.dump(existingStories, file, indent=4)
+# Function to write stories to the JSON file
+def write_stories(stories):
+    with open('stories.json', 'w') as file:
+        json.dump(stories, file, indent=4)
 
-    return jsonify({'success': True})
+# Function to add a story
+@app.route('/add-story', methods=['POST'])
+def add_story():
+    if request.method == 'POST':
+        newStory = request.json
 
-@app.route('/load-prompt', methods=['POST'])
-def load_prompt():
-    # Load the character and scene from a file
-    title = request.get_json(force=True)['title']
+        stories = get_stories()
+        stories.append(newStory)
+        write_stories(stories)
 
-    with open('src/server/inputs.json', 'r') as file:
-        existingStories = json.load(file)
+        return jsonify({'message': 'Story added successfully'})
 
-    if title in existingStories:
-        return jsonify({'success': True, 'character': existingStories[title][0]["Character"], 'scene': existingStories[title][0]["Scene"]})
-    else:
-        return jsonify({'success': False})
+# Function to delete some stories
+@app.route('/delete-stories', methods=['DELETE'])
+def delete_stories():
+    if request.method == 'DELETE':
+        data = request.get_json()
+        story_titles = data.get('Titles', '')
 
-@app.route('/get-titles', methods=['GET'])
-def get_titles():
-    # Load the character and scene from a file
-    with open('src/server/inputs.json', 'r') as file:
-        existingStories = json.load(file)
+        stories = get_stories()
+        updated_stories = [story for story in stories if story['Title'] not in story_titles]
+        write_stories(updated_stories)
 
-    return jsonify({'success': True, 'titles': list(existingStories.keys())})
+        return jsonify({'message': 'Stories deleted successfully'})
 
 # Function to generate a story based on a given prompt
 @app.route('/generate-story', methods=['POST'])

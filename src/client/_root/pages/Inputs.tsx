@@ -1,12 +1,21 @@
 import { Button } from "@/client/components/ui/button";
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import SideBar from "@/client/components/shared/SideBar";
 
 const Inputs = () => {
-	const navigate = useNavigate();
-	const [character, setCharacter] = useState("");
-	const [scene, setStoryDescription] = useState("");
-	const [title, setTitle] = useState("");
+	const [story, setStory] = useState({
+		Title: '',
+		Scene: '',
+	});
+
+	const modifyStory = (e: any) => {
+		const { name, value } = e.target;
+		setStory((prev) => ({
+			...prev,
+			[name]: value,
+		}));
+	};
+
 
 	async function handleSubmit(e: any) {
 		e.preventDefault();
@@ -14,98 +23,55 @@ const Inputs = () => {
 		const formData = new FormData(form);
 
 		if (
-			formData.get("storyName") == "" ||
-			formData.get("trainingName") == "" ||
-			formData.get("trainingDesc") == ""
+			formData.get("title") == "" ||
+			formData.get("description") == ""
 		) {
 			alert("Error: Please fill all the fields");
 			return;
 		}
 
-		const newData = {
-			title: title,
-			character: "Character: " + character,
-			scene: "Scene: " + scene,
-		};
-
-		localStorage.setItem("character", newData.character);
-		localStorage.setItem("scene", newData.scene);
-
 		try {
-			const response = await fetch("http://localhost:3000/save-prompt", {
+			const response = await fetch("http://localhost:3000/add-story", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(newData),
+				body: JSON.stringify(story),
 			});
 
-			alert("Data submitted successfully");
-			console.log(response);
-
-			if (response.status == 200) {
-				try {
-					const responseData = await response.json();
-					console.log("Success:", responseData);
-					navigate("/loading");
-				} catch (error) {
-					console.error("Error parsing JSON:", error);
-				}
+			if (response.ok) {
+				console.log('Story information saved successfully');
 			} else {
-				console.error("Server responded with an error:", response.statusText);
-				alert("Failed to submit data. Please try again.");
+				console.error('Failed to save story information');
 			}
 		} catch (error) {
-			console.error("Error:", error);
-			alert("Failed to submit data. Please try again.");
+			console.error('Error occurred:', error);
 		}
 	}
 
 	return (
-		<form
-			className="flex flex-col flex-center h-full w-full"
-			method="post"
-			onSubmit={handleSubmit}
-		>
-			<label className="input_label">STORY TITLE</label>
-			<textarea
-				className="input_text_b"
-				name="storyName"
-				placeholder="type here the title of the story"
-				value={title}
-				onChange={(e) => setTitle(e.target.value)}
-			></textarea>
-			<hr style={{ height: 25 }} />
+		<section className="container">
+			<SideBar />
+			<form className="sett-form" method="post" onSubmit={handleSubmit}>
+				<div className="sett-table">
+					<div className="sett-title">Story Details</div>
+					<div className='sett-row'>
+						<label className="sett-col">Title</label>
+						<textarea className="story-col" style={{ height: '34px' }} name="title" placeholder="Title of the story" value={story.Title} onChange={modifyStory} />
+					</div>
+					<div className='sett-row'>
+						<label className="sett-col">Description</label>
+						<textarea className="story-col" name="description"
+							placeholder="Brief description of the story"
+							value={story.Scene}
+							onChange={modifyStory}
+						></textarea>
+					</div>
+				</div>
 
-			<label className="input_label">STORY CHARACTER</label>
-			<textarea
-				className="input_text_b"
-				name="trainingName"
-				placeholder="type here the character description"
-				value={character}
-				onChange={(e) => setCharacter(e.target.value)}
-			></textarea>
-			<hr style={{ height: 25 }} />
-
-			<label className="input_label">STORY DESCRIPTION</label>
-			<textarea
-				className="input_text_b"
-				name="trainingDesc"
-				placeholder="type here a brief description of your story"
-				value={scene}
-				onChange={(e) => setStoryDescription(e.target.value)}
-			></textarea>
-			<hr style={{ height: 50 }} />
-
-			<div className="flex flex-row flex-center w-full gap-6">
-				<Button className="submit_button" type="reset">
-					Clear
-				</Button>
-				<Button className="submit_button" type="submit">
-					Submit
-				</Button>
-			</div>
-		</form>
+				<Button className="save-button" type="submit">Save</Button>
+			</form>
+		</section>
 	);
 };
 
