@@ -19,9 +19,6 @@ const Category = () => {
         console.log(data); // Show stories in the console
       })
       .catch((error) => console.error('Error fetching data:', error));
-
-      
-
   }, []);
 
   const handleButtonClick = (e: any) => {

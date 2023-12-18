@@ -14,6 +14,7 @@ const Inputs = () => {
 			try {
 				const response = await fetch("http://localhost:3000/generate-story", {
 					method: "POST",
+					mode: 'no-cors',
 					headers: {
 						"Content-Type": "application/json",
 					},
@@ -51,7 +52,7 @@ const Inputs = () => {
 	}, []);
 
 	return (
-		<div className="flex flex-col h-full items-center gap-4 h1-bold">
+		<div className="container">
 			Loading Story...
 		</div>
 	);

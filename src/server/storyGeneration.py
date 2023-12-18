@@ -18,19 +18,31 @@ openai.api_key = api_key
 def user_data():
     data = request.get_json()
 
+    with open('src/server/userInfo.json', 'r') as file:
+        oldData = json.load(file)
+
+    if 'name' in data.keys() and data['name'] != '':
+        for key in oldData['user'].keys():
+            oldData['user'][key] = data[key]
+    
+    if 'text' in data.keys() and data['text'] != '':
+        for key in oldData['settings'].keys():
+            oldData['settings'][key] = data[key]
+
+
     with open('src/server/userInfo.json', 'w') as file:
-        json.dump(data, file, indent=4)
+        json.dump(oldData, file, indent=4)
 
     return jsonify({'message': 'User data saved successfully'})
 
 # Function to read stories from the JSON file
 def get_stories():
-    with open('stories.json', 'r') as file:
+    with open('src/server/stories.json', 'r') as file:
         return json.load(file)
 
 # Function to write stories to the JSON file
 def write_stories(stories):
-    with open('stories.json', 'w') as file:
+    with open('src/server/stories.json', 'w') as file:
         json.dump(stories, file, indent=4)
 
 # Function to add a story
@@ -53,8 +65,12 @@ def delete_stories():
         story_titles = data.get('Titles', '')
 
         stories = get_stories()
-        updated_stories = [story for story in stories if story['Title'] not in story_titles]
-        write_stories(updated_stories)
+
+        for s in story_titles:
+            if s in stories['Title']:
+                stories.remove(s)
+
+        write_stories(stories)
 
         return jsonify({'message': 'Stories deleted successfully'})
 
@@ -69,9 +85,6 @@ def generate_story():
 
     with open('src/server/userInfo.json', 'r', encoding='utf-8') as file:
         userInfo = json.load(file)
-
-    with open('src/server/scene_prompt.json', 'r', encoding='utf-8') as file:
-        scene_prompt = json.load(file)
         
 
     prompt[0] = myFile["first"]

@@ -1,0 +1,14 @@
+{
+    "user": {
+        "name": "John",
+        "surname": "Doel",
+        "birthDate": "1990-05-15",
+        "fears": "heights",
+        "interests": "music"
+    },
+    "settings": {
+        "text": "YES",
+        "img": "NO",
+        "speech": "NO"
+    }
+}

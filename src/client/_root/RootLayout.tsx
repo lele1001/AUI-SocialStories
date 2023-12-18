@@ -3,10 +3,10 @@ import { Outlet } from "react-router-dom"
 
 const RootLayout = () => {
   return (
-    <div className="w-full h-fit">
+    <section style={{display: "flex", flexDirection: 'column'}}>
       <TopBar />
       <Outlet />
-    </div>
+    </section>
   )
 }
 

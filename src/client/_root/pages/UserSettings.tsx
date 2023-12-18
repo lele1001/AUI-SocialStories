@@ -1,24 +1,51 @@
 import SideBar from '@/client/components/shared/SideBar';
-import { Button } from '@/client/components/ui/button'
+import { Button } from '@/client/components/ui/button';
+import { useState, useEffect } from 'react';
 
 const UserSettings = () => {
+    const [userSettings, setUserSettings] = useState({
+        text: 'YES',
+        img: 'YES',
+        speech: 'NO',
+    });
+
+    useEffect(() => {
+        // Fetch user settings from the server
+        fetch('src/server/userInfo.json')
+            .then((response) => response.json())
+            .then((data) => {
+                setUserSettings(data.settings); // Update user settings state with fetched data
+            })
+            .catch((error) => console.error('Error fetching user settings:', error));
+    }, []);
+
+    const handleInputChange = (e: any) => {
+        setUserSettings({
+            ...userSettings,
+            [e.target.name]: e.target.value,
+        });
+    };
+
     async function handleSubmit(e: any) {
         e.preventDefault();
-        const formData = new FormData(e.target);
 
-        if (
-            formData.get("text") == "" ||
-            formData.get("img") == ""
-        ) {
-            alert("Error: Please fill all the fields");
-            return;
+        try {
+            const response = await fetch('http://localhost:3000/user-data', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userSettings),
+            });
+
+            if (response.ok) {
+                console.log('User settings saved successfully');
+            } else {
+                console.error('Failed to save user settings');
+            }
+        } catch (error) {
+            console.error('Error occurred:', error);
         }
-
-        localStorage.setItem('text', formData.get("text") as string);
-        localStorage.setItem('images', formData.get("img") as string);
-        // localStorage.setItem('speech', formData.get("speech") as string);
-
-        console.log(localStorage.getItem('text'), localStorage.getItem('images'));
     }
 
     return (
@@ -30,28 +57,64 @@ const UserSettings = () => {
                     <div className='sett-row'>
                         <div className='sett-col'>Text</div>
                         <div className='sett-col'>
-                            <input type='radio' name='text' value='YES' />YES
+                            <input
+                                type='radio'
+                                name='text'
+                                value='YES'
+                                checked={userSettings.text === 'YES'}
+                                onChange={handleInputChange}
+                            />YES
                         </div>
                         <div className='sett-col'>
-                            <input type='radio' name='text' value='NO' />NO
+                            <input
+                                type='radio'
+                                name='text'
+                                value='NO'
+                                checked={userSettings.text === 'NO'}
+                                onChange={handleInputChange}
+                            />NO
                         </div>
                     </div>
                     <div className='sett-row'>
                         <div className='sett-col'>Images</div>
                         <div className='sett-col'>
-                            <input type='radio' name='img' value='YES' />YES
+                            <input
+                                type='radio'
+                                name='img'
+                                value='YES'
+                                checked={userSettings.img === 'YES'}
+                                onChange={handleInputChange}
+                            />YES
                         </div>
                         <div className='sett-col'>
-                            <input type='radio' name='img' value='NO' />NO
+                            <input
+                                type='radio'
+                                name='img'
+                                value='NO'
+                                checked={userSettings.img === 'NO'}
+                                onChange={handleInputChange}
+                            />NO
                         </div>
                     </div>
                     <div className='sett-row'>
                         <div className='sett-col'>Speech</div>
                         <div className='sett-col'>
-                            <input type='radio' name='spe' value='YES' disabled={true} />YES
+                            <input
+                                type='radio'
+                                name='speech'
+                                value='YES'
+                                checked={userSettings.speech === 'YES'}
+                                onChange={handleInputChange}
+                            />YES
                         </div>
                         <div className='sett-col'>
-                            <input type='radio' name='spe' value='NO' disabled={true} />NO
+                            <input
+                                type='radio'
+                                name='speech'
+                                value='NO'
+                                checked={userSettings.speech === 'NO'}
+                                onChange={handleInputChange}
+                            />NO
                         </div>
                     </div>
                 </div>
@@ -59,7 +122,7 @@ const UserSettings = () => {
                 <Button className="save-button" type="submit">Save</Button>
             </form>
         </section>
-    )
-}
+    );
+};
 
-export default UserSettings
+export default UserSettings;

@@ -1,31 +1,37 @@
 import { Button } from "@/client/components/ui/button";
 import SideBar from "@/client/components/shared/SideBar";
+import { useEffect, useState } from "react";
 
 const UserProfile = () => {
+    const [user, setUser] = useState({
+        name: "",
+        surname: "",
+        birthDate: "",
+        fears: "",
+        interests: "",
+    });
+
+    const handleInputChange = (e: any) => {
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value,
+        });
+    };
+
     async function handleSubmit(e: any) {
         e.preventDefault();  
-        const form = e.target;
-        const formData = new FormData(form);      
 
         if (
-            formData.get("name") == "" ||
-            formData.get("surname") == "" ||
-            formData.get("birthDate") == "" ||
-            formData.get("fears") == "" ||
-            formData.get("interests") == ""
+            !user.name ||
+            !user.surname ||
+            !user.birthDate ||
+            !user.fears ||
+            !user.interests
         ) {
             alert("Error: Please fill all the fields");
             return;
         }
-
-        const user = {
-            name: formData.get("name"),
-            surname: formData.get("surname"),
-            birthDate: formData.get("birthDate"),
-            fears: formData.get("fears"),
-            interests: formData.get("interests"),
-        };
-
+                
         try {
             const response = await fetch('http://localhost:3000/user-data', {
                 method: 'POST',
@@ -45,31 +51,73 @@ const UserProfile = () => {
         }
     }
 
+    useEffect(() => {
+        // Fetch user data from the server
+        fetch('src/server/userInfo.json')
+            .then((response) => response.json())
+            .then((data) => {
+                setUser(data.user); // Update user state with fetched data
+            })
+            .catch((error) => console.error('Error fetching data:', error));
+    }, []); 
+
     return (
         <section className='container'>
             <SideBar />
-            <form className="sett-form" method="post" onSubmit={handleSubmit}>
+            <form className="sett-form" onSubmit={handleSubmit}>
                 <div className='sett-table'>
                     <div className='sett-title'>User Details</div>
                     <div className='sett-row'>
                         <label className='sett-col'>Name</label>
-                        <textarea className="user-col" style={{ height: '34px' }} name='name' placeholder="Name"/>
+                        <input
+                            className="user-col"
+                            type='text'
+                            name='name'
+                            placeholder="Name"
+                            value={user.name}
+                            onChange={handleInputChange}
+                        />
                     </div>
                     <div className='sett-row'>
                         <label className='sett-col'>Surname</label>
-                        <textarea className="user-col" style={{ height: '34px' }}  name='surname' placeholder="Surname"/>
+                        <input
+                            className="user-col"
+                            type='text'
+                            name='surname'
+                            placeholder="Surname"
+                            value={user.surname}
+                            onChange={handleInputChange}
+                        />
                     </div>
                     <div className='sett-row'>
                         <label className='sett-col'>Birth Date</label>
-                        <textarea className="user-col" style={{ height: '34px' }} name='birthDate' placeholder="DD-MM-YYYY" />
+                        <input
+                            className="user-col"
+                            type='date'
+                            name='birthDate'
+                            value={user.birthDate}
+                            onChange={handleInputChange}
+                        />
                     </div>
                     <div className='sett-row'>
                         <label className='sett-col'>Fears</label>
-                        <textarea className="user-col" name='fears' placeholder="Fears (comma-separated)" />
+                        <textarea
+                            className="user-col"
+                            name='fears'
+                            placeholder="Fears"
+                            value={user.fears}
+                            onChange={handleInputChange}
+                        />
                     </div>
                     <div className='sett-row'>
                         <label className='sett-col'>Interests</label>
-                        <textarea className="user-col" name='interests' placeholder="Interests (comma-separated)" />
+                        <textarea
+                            className="user-col"
+                            name='interests'
+                            placeholder="Interests"
+                            value={user.interests}
+                            onChange={handleInputChange}
+                        />
                     </div>
                 </div>
 
