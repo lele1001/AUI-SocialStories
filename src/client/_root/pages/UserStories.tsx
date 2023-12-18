@@ -30,16 +30,12 @@ const UserStories = () => {
   };
 
   const handleDelete = () => {
-    const updatedStories = stories.filter((story) => !checkedStories.includes(story.Title));
-    setStories(updatedStories);
-    setCheckedStories([]);
-
     fetch('http://localhost:3000/delete-stories', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ checkedStories: checkedStories.map(story => ({ Title: story })) })
+      body: JSON.stringify({ checkedStories })
     })
       .then(response => {
         if (response.ok) {

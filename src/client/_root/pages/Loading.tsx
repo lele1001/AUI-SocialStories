@@ -3,14 +3,29 @@ import { useEffect } from "react";
 
 const Inputs = () => {
 	const navigate = useNavigate();
+	let images = ''
 
 	useEffect(() => {
 		const fetchData = async () => {
-			const storyData = {
-				title: localStorage.getItem("title"),
-				txtOnly: localStorage.getItem("images") == "NO" ? true : false
-			}
 
+			fetch('src/server/stories.json')
+				.then((response) => response.json())
+				.then((data) => {
+					for (let i = 0; i < data.length; i++) {
+						if (data[i].Title == localStorage.getItem("title")) {
+							localStorage.setItem("setting", data[i].Setting);
+						}
+					}					
+				})
+				.catch((error) => console.error('Error fetching data:', error));
+
+			fetch('src/server/userInfo.json')
+				.then((response) => response.json())
+				.then((data) => {
+					images = data['settings']['img']	
+				})
+				.catch((error) => console.error('Error fetching data:', error));
+			
 			try {
 				const response = await fetch("http://localhost:3000/generate-story", {
 					method: "POST",
@@ -18,7 +33,7 @@ const Inputs = () => {
 					headers: {
 						"Content-Type": "application/json",
 					},
-					body: JSON.stringify(storyData),
+					body: JSON.stringify(localStorage.getItem("setting")),
 				});
 
 				if (response.status == 200) {
@@ -28,7 +43,7 @@ const Inputs = () => {
 						localStorage.setItem("story", JSON.stringify(responseData));
 						
 						// Redirect or perform any action after successful submission
-						if (localStorage.getItem("images") == "YES") {
+						if (images == "YES") {
 							navigate("/story-txt-img");
 						} else {
 							navigate("/story-txt");

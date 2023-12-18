@@ -61,17 +61,11 @@ def add_story():
 @app.route('/delete-stories', methods=['DELETE'])
 def delete_stories():
     if request.method == 'DELETE':
-        data = request.get_json()
-        story_titles = data.get('Titles', '')
-
-        stories = get_stories()
-
-        for s in story_titles:
-            if s in stories['Title']:
-                stories.remove(s)
-
-        write_stories(stories)
-
+        stories = request.get_json()
+        checkedStories = stories.get('checkedStories', [])
+        oldStories = get_stories()
+        updatedStories = [story for story in oldStories if story['Title'] not in checkedStories]
+        write_stories(updatedStories)
         return jsonify({'message': 'Stories deleted successfully'})
 
 # Function to generate a story based on a given prompt
@@ -79,6 +73,7 @@ def delete_stories():
 def generate_story():
     # Read the existing data from the files
     prompt = [0, 1, 2, 3, 4]
+    scene = request.get_json(force=True)
     
     with open('src/server/initial_prompt.json', 'r', encoding='utf-8') as file:
         myFile = json.load(file)
@@ -89,11 +84,13 @@ def generate_story():
 
     prompt[0] = myFile["first"]
     prompt[1] = myFile["second"]
-    prompt[2] = userInfo
-
+    prompt[2] = {
+        "role": "user",
+        "content": "The story is for " + userInfo['user']['name'] + userInfo['user']['surname'] + ", which was born on " + userInfo['user']['birthDate']
+    }
     prompt[3] = {
         "role": "user", 
-        "content": request.get_json(force=True)['scene'] + '\n Remember to keep any mention of the main character out of the images.'}
+        "content": scene + '\n Remember to keep any mention of the main character out of the images.'}
     
     prompt[4]={
         "role":"user", 
@@ -114,6 +111,7 @@ def generate_story():
     messages = story.split('\\n')
     for message in messages:
         message = message.replace('"',"")
+        print(message)
         if message.startswith("Image"):
             image_description = message.split(":")[1].strip()
             images.append(image_description)
@@ -121,10 +119,9 @@ def generate_story():
             part_content = message.split(":")[1].strip()
             part_prompts.append(part_content)
 
-    if request.get_json(force=True)['txtOnly'] == True:
+    if userInfo['settings']['img'] == 'NO':
         return jsonify({'parts': part_prompts})
 
-  
     # Generating images using DALL-E
     generated_images = []
     for index, description in enumerate(images, start=1):
