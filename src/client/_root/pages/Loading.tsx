@@ -3,11 +3,9 @@ import { useEffect } from "react";
 
 const Inputs = () => {
 	const navigate = useNavigate();
-	let images = ''
 
 	useEffect(() => {
 		const fetchData = async () => {
-
 			fetch('src/server/stories.json')
 				.then((response) => response.json())
 				.then((data) => {
@@ -18,32 +16,24 @@ const Inputs = () => {
 					}					
 				})
 				.catch((error) => console.error('Error fetching data:', error));
-
-			fetch('src/server/userInfo.json')
-				.then((response) => response.json())
-				.then((data) => {
-					images = data['settings']['img']	
-				})
-				.catch((error) => console.error('Error fetching data:', error));
 			
 			try {
 				const response = await fetch("http://localhost:3000/generate-story", {
 					method: "POST",
-					mode: 'no-cors',
 					headers: {
 						"Content-Type": "application/json",
 					},
 					body: JSON.stringify(localStorage.getItem("setting")),
 				});
 
-				if (response.status == 200) {
+				if (response.ok) {
 					try {
 						const responseData = await response.json();
 						console.log("Success:", responseData);
 						localStorage.setItem("story", JSON.stringify(responseData));
 						
 						// Redirect or perform any action after successful submission
-						if (images == "YES") {
+						if (localStorage.getItem('images') == "YES") {
 							navigate("/story-txt-img");
 						} else {
 							navigate("/story-txt");

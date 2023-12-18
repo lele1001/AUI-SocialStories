@@ -9,7 +9,6 @@ const Story = () => {
 
 	useEffect(() => {
 		let story = JSON.parse(localStorage.getItem("story") || "") as {
-			images: [];
 			parts: [];
 		};
 
@@ -33,17 +32,17 @@ const Story = () => {
 	};
 
 	return (
-		<div className="flex flex-col h-full items-center gap-4">
+		<section className="container-v">
 				<div className="story">{parts[currentIndex]}</div>
-				<div className="flex flex-row flex-center w-full gap-6">
-					<Button id="prev" className="button_primary" onClick={handlePrevious}>
+				<div className="container">
+				<Button id="prev" className="save-button" onClick={handlePrevious}>
 						Previous
 					</Button>
-					<Button id="next" className="button_primary" onClick={handleNext}>
+				<Button id="next" className="save-button" onClick={handleNext}>
 						Next
 					</Button>
 				</div>
-		</div>
+		</section>
 	);
 };
 

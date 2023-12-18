@@ -35,10 +35,10 @@ const Story = () => {
 	};
 
 	return (
-		<div className="flex flex-row h-full items-stretch">
-			<div className="storyContainer">
-				<div className="storyText">{parts[currentIndex]}</div>
-				<div className="flex flex-row gap-6">
+		<div className="container">
+			<div className="container-v">
+				<div className="story">{parts[currentIndex]}</div>
+				<div className="container">
 					<Button id="prev" className="button_primary" onClick={handlePrevious}>
 						Previous
 					</Button>
@@ -48,14 +48,8 @@ const Story = () => {
 				</div>
 			</div>
 			{images.length > 0 && (
-				<div className="w-full">
-					<img
-						className="content-crop"
-						src={images[currentIndex]}
-						alt={`Image ${currentIndex + 1}`}
-					/>
-				</div>
-			)}
+				<img className="content-crop" src={images[currentIndex]} alt={`Image ${currentIndex + 1}`}/>
+			)} 
 		</div>
 	);
 };

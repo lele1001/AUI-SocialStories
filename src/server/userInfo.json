@@ -2,8 +2,8 @@
     "user": {
         "name": "John",
         "surname": "Doel",
-        "birthDate": "1990-05-15",
-        "fears": "heights",
+        "birthDate": "2012-05-15",
+        "fears": "heigths",
         "interests": "music"
     },
     "settings": {
