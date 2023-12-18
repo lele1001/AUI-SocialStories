@@ -1,22 +1,7 @@
 import { Button } from "@/client/components/ui/button";
-import { useState } from "react";
 import SideBar from "@/client/components/shared/SideBar";
 
 const Inputs = () => {
-	const [story, setStory] = useState({
-		Title: '',
-		Scene: '',
-	});
-
-	const modifyStory = (e: any) => {
-		const { name, value } = e.target;
-		setStory((prev) => ({
-			...prev,
-			[name]: value,
-		}));
-	};
-
-
 	async function handleSubmit(e: any) {
 		e.preventDefault();
 		const form = e.target;
@@ -29,6 +14,11 @@ const Inputs = () => {
 			alert("Error: Please fill all the fields");
 			return;
 		}
+
+		const story = {
+			Title: formData.get("title"),
+			Scene: formData.get("description"),
+		};
 
 		try {
 			const response = await fetch("http://localhost:3000/add-story", {
@@ -57,15 +47,12 @@ const Inputs = () => {
 					<div className="sett-title">Story Details</div>
 					<div className='sett-row'>
 						<label className="sett-col">Title</label>
-						<textarea className="story-col" style={{ height: '34px' }} name="title" placeholder="Title of the story" value={story.Title} onChange={modifyStory} />
+						<textarea className="story-col" style={{ height: '34px' }} name="title" placeholder="Title of the story" />
 					</div>
 					<div className='sett-row'>
 						<label className="sett-col">Description</label>
 						<textarea className="story-col" name="description"
-							placeholder="Brief description of the story"
-							value={story.Scene}
-							onChange={modifyStory}
-						></textarea>
+							placeholder="Brief description of the story"></textarea>
 					</div>
 				</div>
 

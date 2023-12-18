@@ -16,13 +16,12 @@ openai.api_key = api_key
 # Function to save the user data to a JSON file
 @app.route('/user-data', methods=['POST'])
 def user_data():
-    if request.method == 'POST':
-        data = request.get_json()
+    data = request.get_json()
 
-        with open('useInfo.json', 'w') as file:
-            json.dump(data, file, indent=4)
+    with open('src/server/userInfo.json', 'w') as file:
+        json.dump(data, file, indent=4)
 
-        return jsonify({'message': 'User data saved successfully'})
+    return jsonify({'message': 'User data saved successfully'})
 
 # Function to read stories from the JSON file
 def get_stories():
@@ -63,19 +62,27 @@ def delete_stories():
 @app.route('/generate-story', methods=['POST'])
 def generate_story():
     # Read the existing data from the files
-    prompt = [0, 1, 2, 3]
+    prompt = [0, 1, 2, 3, 4]
     
     with open('src/server/initial_prompt.json', 'r', encoding='utf-8') as file:
         myFile = json.load(file)
 
+    with open('src/server/userInfo.json', 'r', encoding='utf-8') as file:
+        userInfo = json.load(file)
+
+    with open('src/server/scene_prompt.json', 'r', encoding='utf-8') as file:
+        scene_prompt = json.load(file)
+        
+
     prompt[0] = myFile["first"]
     prompt[1] = myFile["second"]
+    prompt[2] = userInfo
 
-    prompt[2] = {
+    prompt[3] = {
         "role": "user", 
-        "content": request.get_json(force=True)['character'] + request.get_json(force=True)['scene'] + '\n Remember to keep any mention of the main character out of the images.'}
+        "content": request.get_json(force=True)['scene'] + '\n Remember to keep any mention of the main character out of the images.'}
     
-    prompt[3]={
+    prompt[4]={
         "role":"user", 
         "content":"START"}
 

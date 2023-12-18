@@ -7,8 +7,7 @@ const Inputs = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const storyData = {
-				character: localStorage.getItem("character"),
-				scene: localStorage.getItem("scene"),
+				title: localStorage.getItem("title"),
 				txtOnly: localStorage.getItem("images") == "NO" ? true : false
 			}
 

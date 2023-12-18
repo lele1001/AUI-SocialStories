@@ -14,15 +14,18 @@ const Category = () => {
   useEffect(() => {
     fetch('src/server/stories.json')
       .then((response) => response.json())
-      .then((data) => setStories(data))
+      .then((data) => {
+        setStories(data);
+        console.log(data); // Show stories in the console
+      })
       .catch((error) => console.error('Error fetching data:', error));
+
+      
+
   }, []);
 
-  const handleButtonClick = (title: any) => {
-    localStorage.setItem("title", title);
-    localStorage.setItem("scene", stories[title].Scene);
-    console.log(stories[title]);
-    console.log("Success");
+  const handleButtonClick = (e: any) => {
+    localStorage.setItem("title", e.target.textContent);
     navigate("/loading");
   };
 
