@@ -122,6 +122,11 @@ textarea, input {
 	font-weight: bold;
 }
 
+.subtitle {
+	font-size: 32px;
+	font-weight: bold;
+}
+
 .exit {
 	flex: 1;
 	background-color: var(--txt-blue);

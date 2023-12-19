@@ -1,3 +1,4 @@
+import random
 import re
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -67,6 +68,36 @@ def delete_stories():
         updatedStories = [story for story in oldStories if story['Title'] not in checkedStories]
         write_stories(updatedStories)
         return jsonify({'message': 'Stories deleted successfully'})
+
+# Function to retrieve a saved story
+@app.route('/retrieve-story', methods=['POST'])
+def retrieve_story():
+    if request.method == 'POST':      
+        title = request.json
+        storyNumber = random.randint(0, 4)
+        print("Title: ", title)
+        
+        with open('src/server/savedStories.json', 'r') as file:
+            savedStories = json.load(file)
+
+            if title in savedStories:
+                story_versions = savedStories[title]
+                selected_story = story_versions[storyNumber]
+
+                print(selected_story)
+
+                parts = []
+                for key, value in selected_story.items():
+                    if key.startswith("Part"):
+                        parts.append(value)
+
+                return jsonify({'parts': parts})
+            else:
+                available_titles = list(savedStories.keys())
+                print(f"Available titles: {available_titles}")
+                
+                return jsonify({'parts': []})
+            
 
 # Function to generate a story based on a given prompt
 @app.route('/generate-story', methods=['POST'])

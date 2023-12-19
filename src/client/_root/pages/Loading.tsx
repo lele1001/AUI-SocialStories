@@ -5,35 +5,54 @@ const Inputs = () => {
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		const fetchData = async () => {
-			fetch('src/server/stories.json')
-				.then((response) => response.json())
-				.then((data) => {
-					for (let i = 0; i < data.length; i++) {
-						if (data[i].Title == localStorage.getItem("title")) {
-							localStorage.setItem("setting", data[i].Setting);
-						}
-					}					
-				})
-				.catch((error) => console.error('Error fetching data:', error));
-			
+		const title = localStorage.getItem("title");
+
+		const fetchData = async () => {			
 			try {
-				const response = await fetch("http://localhost:3000/generate-story", {
-					method: "POST",
-					headers: {
-						"Content-Type": "application/json",
-					},
-					body: JSON.stringify(localStorage.getItem("setting")),
-				});
+				let response;
+
+				if (localStorage.getItem("storyType") == "offline") {
+					response = await fetch("http://localhost:3000/retrieve-story", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(title),
+					});
+				} else {
+					fetch('src/server/stories.json')
+						.then((response) => response.json())
+						.then((data) => {
+							for (let i = 0; i < data.length; i++) {
+								if (data[i].Title == title) {
+									localStorage.setItem("setting", data[i].Setting);
+								}
+							}
+						})
+						.catch((error) => console.error('Error fetching data:', error));
+
+					response = await fetch("http://localhost:3000/generate-story", {
+						method: "POST",
+						headers: {
+							"Content-Type": "application/json",
+						},
+						body: JSON.stringify(localStorage.getItem("setting")),
+					});
+				}
 
 				if (response.ok) {
 					try {
 						const responseData = await response.json();
-						console.log("Success:", responseData);
+
+						if (responseData.length == 0) {
+							alert("Failed to load data. Please try again.");
+							navigate("/");
+						}
+
 						localStorage.setItem("story", JSON.stringify(responseData));
-						
+
 						// Redirect or perform any action after successful submission
-						if (localStorage.getItem('images') == "YES") {
+						if (localStorage.getItem('images') == "YES" && localStorage.getItem('storyType') == "online") {
 							navigate("/story-txt-img");
 						} else {
 							navigate("/story-txt");
@@ -52,7 +71,7 @@ const Inputs = () => {
 				navigate("/");
 			}
 		};
-
+		
 		fetchData();
 	}, []);
 

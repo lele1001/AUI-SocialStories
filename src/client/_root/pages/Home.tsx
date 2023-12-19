@@ -7,7 +7,7 @@ const Home = () => {
     return (
         <div className="container">
             <Button className="save-button" onClick={() => navigate('/user-profile')}>Settings</Button>
-            <Button className="save-button" onClick={() => navigate('/category')}>Select the story</Button>
+            <Button className="save-button" onClick={() => navigate('/type')}>Select the story</Button>
         </div>
     )
 }

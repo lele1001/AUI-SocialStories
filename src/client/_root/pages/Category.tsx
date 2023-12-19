@@ -16,13 +16,12 @@ const Category = () => {
       .then((response) => response.json())
       .then((data) => {
         setStories(data);
-        console.log(data); // Show stories in the console
       })
       .catch((error) => console.error('Error fetching data:', error));
   }, []);
 
-  const handleButtonClick = (e: any) => {
-    localStorage.setItem("title", e.target.textContent);
+  const handleButtonClick = (title: string) => {
+    localStorage.setItem("title", title); 
     navigate("/loading");
   };
 
@@ -30,7 +29,9 @@ const Category = () => {
   return (
     <div className="container-v">
       {stories.map((myStory) => (
-        <Button key={myStory.Title} className="save-button" onClick={handleButtonClick}>{myStory.Title}</Button>
+        <Button key={myStory.Title} className="save-button" onClick={() => handleButtonClick(myStory.Title)}>
+          {myStory.Title}
+        </Button>
       ))}
     </div>
   );
