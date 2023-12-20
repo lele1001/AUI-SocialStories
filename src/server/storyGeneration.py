@@ -117,7 +117,7 @@ def generate_story():
     prompt[1] = myFile["second"]
     prompt[2] = {
         "role": "user",
-        "content": "The story is for " + userInfo['user']['name'] + userInfo['user']['surname'] + ", which was born on " + userInfo['user']['birthDate']
+        "content": "The story is for " + userInfo['user']['name'] + " " + userInfo['user']['surname'] + ", which was born on " + userInfo['user']['birthDate'] + ". This person likes " + userInfo['user']['interests']
     }
     prompt[3] = {
         "role": "user", 

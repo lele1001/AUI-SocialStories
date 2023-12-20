@@ -12,12 +12,23 @@ const Category = () => {
   const [stories, setStories] = useState<Story[]>([]);
 
   useEffect(() => {
-    fetch('src/server/stories.json')
-      .then((response) => response.json())
-      .then((data) => {
-        setStories(data);
-      })
-      .catch((error) => console.error('Error fetching data:', error));
+    if (localStorage.getItem("storyType") === "offline") {
+      fetch('src/server/savedStories.json')
+        .then((response) => response.json())
+        .then((data) => {
+          const titles = Object.keys(data);
+          setStories(titles.map((title) => ({ Title: title, Scene: "" })));
+        })
+        .catch((error) => console.error('Error fetching data:', error));
+    }
+    else {
+      fetch('src/server/stories.json')
+        .then((response) => response.json())
+        .then((data) => {
+          setStories(data);
+        })
+        .catch((error) => console.error('Error fetching data:', error));
+    }
   }, []);
 
   const handleButtonClick = (title: string) => {

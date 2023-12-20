@@ -1,14 +1,14 @@
 {
     "user": {
-        "name": "John",
-        "surname": "Doel",
+        "name": "Mario",
+        "surname": "Rossi",
         "birthDate": "2012-05-15",
-        "fears": "heigths",
+        "fears": "spiders",
         "interests": "music"
     },
     "settings": {
-        "text": "YES",
-        "img": "NO",
+        "text": "NO",
+        "img": "YES",
         "speech": "NO"
     }
 }

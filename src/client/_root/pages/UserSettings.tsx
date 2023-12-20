@@ -40,6 +40,7 @@ const UserSettings = () => {
 
             if (response.ok) {
                 console.log('User settings saved successfully');
+                alert('User settings saved successfully');
                 localStorage.setItem('images', JSON.stringify(userSettings.Images));
             } else {
                 console.error('Failed to save user settings');
@@ -62,7 +63,6 @@ const UserSettings = () => {
                                 type='radio'
                                 name='text'
                                 value='YES'
-                                checked={userSettings.Text === 'YES'}
                                 onChange={handleInputChange}
                             />YES
                         </div>
@@ -71,7 +71,6 @@ const UserSettings = () => {
                                 type='radio'
                                 name='text'
                                 value='NO'
-                                checked={userSettings.Text === 'NO'}
                                 onChange={handleInputChange}
                             />NO
                         </div>
@@ -83,7 +82,6 @@ const UserSettings = () => {
                                 type='radio'
                                 name='img'
                                 value='YES'
-                                checked={userSettings.Images === 'YES'}
                                 onChange={handleInputChange}
                             />YES
                         </div>
@@ -92,7 +90,6 @@ const UserSettings = () => {
                                 type='radio'
                                 name='img'
                                 value='NO'
-                                checked={userSettings.Images === 'NO'}
                                 onChange={handleInputChange}
                             />NO
                         </div>
@@ -104,7 +101,7 @@ const UserSettings = () => {
                                 type='radio'
                                 name='speech'
                                 value='YES'
-                                checked={userSettings.Speech === 'YES'}
+                                disabled={true}
                                 onChange={handleInputChange}
                             />YES
                         </div>
@@ -113,7 +110,7 @@ const UserSettings = () => {
                                 type='radio'
                                 name='speech'
                                 value='NO'
-                                checked={userSettings.Speech === 'NO'}
+                                disabled={true}
                                 onChange={handleInputChange}
                             />NO
                         </div>

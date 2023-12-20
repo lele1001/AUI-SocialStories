@@ -43,7 +43,7 @@ const UserProfile = () => {
 
             if (response.ok) {
                 console.log('User information saved successfully');
-                
+                alert("User information saved successfully");
             } else {
                 console.error('Failed to save user information');
             }

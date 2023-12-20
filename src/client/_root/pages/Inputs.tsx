@@ -31,6 +31,8 @@ const Inputs = () => {
 
 			if (response.ok) {
 				console.log('Story information saved successfully');
+				alert("Story information saved successfully");
+				form.reset();
 			} else {
 				console.error('Failed to save story information');
 			}

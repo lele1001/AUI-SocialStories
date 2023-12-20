@@ -40,6 +40,8 @@ const UserStories = () => {
       .then(response => {
         if (response.ok) {
           console.log('Stories deleted successfully!');
+          alert('Stories deleted successfully!');
+          fetchStories();
         } else {
           throw new Error('Failed to delete stories');
         }

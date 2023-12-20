@@ -1,22 +1,18 @@
 [
     {
         "Title": "The dentist",
-        "Scene": "Scene: I need to go to the dentist but I don't like being in places with a lot of people"
+        "Scene": "I need to go to the dentist but I don't like being in places with a lot of people"
     },
     {
         "Title": "Tidy the room",
-        "Scene": "Scene: Maria wants to clean her bedroom"
-    },
-    {
-        "Title": "The superhero",
-        "Scene": "Scene: Paul the superhero wants to save a cat drowning in a pool"
-    },
-    {
-        "Title": "Anger",
-        "Scene": "Scene: Marco got angry with Luca and punched him "
+        "Scene": "Teach the kid that the bedroom should be cleaned after playing"
     },
     {
         "Title": "The bus",
         "Scene": "The bus is always crowded and for the kid is hard to stay in crowded places"
+    },
+    {
+        "Title": "Anger",
+        "Scene": "Help the kid understand that punching others is wrong"
     }
 ]
