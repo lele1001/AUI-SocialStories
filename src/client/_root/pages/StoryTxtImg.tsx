@@ -23,7 +23,6 @@ const Story = () => {
 			setCurrentIndex(currentIndex + 1);
 		}
 		else if (currentIndex == parts.length - 1) {
-			document.getElementById("next")!.innerHTML = "Finish";
 			navigate('/');
 		}
 	};
@@ -34,21 +33,23 @@ const Story = () => {
 		}
 	};
 
+	const nextButtonText = currentIndex === parts.length - 1 ? "Finish" : "Next";
+
 	return (
-		<div className="container">
+		<div className="story-container">
 			<div className="container-v">
-				<div className="story">{parts[currentIndex]}</div>
-				<div className="container">
-					<Button id="prev" className="button_primary" onClick={handlePrevious}>
+				<label className="story">{parts[currentIndex]}</label>
+				<div className="story-container" style={{gap: 20}}>
+					<Button id="prev" className="save-button" onClick={handlePrevious}>
 						Previous
 					</Button>
-					<Button id="next" className="button_primary" onClick={handleNext}>
-						Next
+					<Button id="next" className="save-button" onClick={handleNext}>
+						{nextButtonText}
 					</Button>
 				</div>
 			</div>
 			{images.length > 0 && (
-				<img className="content-crop" src={images[currentIndex]} alt={`Image ${currentIndex + 1}`}/>
+				<img className="story-img" src={images[currentIndex]} alt={`Image ${currentIndex + 1}`}/>
 			)} 
 		</div>
 	);

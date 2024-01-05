@@ -104,14 +104,21 @@ def retrieve_story():
 def generate_story():
     # Read the existing data from the files
     prompt = [0, 1, 2, 3, 4]
-    scene = request.get_json(force=True)
+    title = request.json
     
     with open('src/server/initial_prompt.json', 'r', encoding='utf-8') as file:
         myFile = json.load(file)
 
     with open('src/server/userInfo.json', 'r', encoding='utf-8') as file:
         userInfo = json.load(file)
-        
+
+    with open('src/server/stories.json', 'r', encoding='utf-8') as file:
+        stories = json.load(file)
+
+        for story in stories:
+            if story['Title'] == title:
+                scene = story['Scene']
+                break        
 
     prompt[0] = myFile["first"]
     prompt[1] = myFile["second"]
@@ -121,7 +128,8 @@ def generate_story():
     }
     prompt[3] = {
         "role": "user", 
-        "content": scene + '\n Remember to keep any mention of the main character out of the images.'}
+        "content": "The scenario of the story is: " + scene + "\n Remember to keep any mention of the main character out of the images" 
+    }
     
     prompt[4]={
         "role":"user", 

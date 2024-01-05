@@ -4,20 +4,10 @@ import { useState, useEffect } from 'react';
 
 const UserSettings = () => {
     const [userSettings, setUserSettings] = useState({
-        Text: 'YES',
-        Images: 'YES',
-        Speech: 'NO',
+        Text: '',
+        Images: '',
+        Speech: '',
     });
-
-    useEffect(() => {
-        // Fetch user settings from the server
-        fetch('src/server/userInfo.json')
-            .then((response) => response.json())
-            .then((data) => {
-                setUserSettings(data.settings); // Update user settings state with fetched data
-            })
-            .catch((error) => console.error('Error fetching user settings:', error));
-    }, []);
 
     const handleInputChange = (e: any) => {
         setUserSettings({
@@ -41,7 +31,6 @@ const UserSettings = () => {
             if (response.ok) {
                 console.log('User settings saved successfully');
                 alert('User settings saved successfully');
-                localStorage.setItem('images', JSON.stringify(userSettings.Images));
             } else {
                 console.error('Failed to save user settings');
             }
@@ -50,6 +39,17 @@ const UserSettings = () => {
         }
     }
 
+    useEffect(() => {
+        // Fetch user settings from the server
+        fetch('src/server/userInfo.json')
+            .then((response) => response.json())
+            .then((data) => {
+                setUserSettings(data.settings); // Update user settings state with fetched data
+            })
+            .catch((error) => console.error('Error fetching user settings:', error));
+    }, []);
+
+
     return (
         <section className='container'>
             <SideBar />
@@ -57,13 +57,14 @@ const UserSettings = () => {
                 <div className='sett-table'>
                     <div className='sett-title'>Story Settings</div>
                     <div className='sett-row'>
-                        <div className='sett-col'>Text</div>
+                        <label className='sett-col'>Text</label>
                         <div className='sett-col'>
                             <input
                                 type='radio'
                                 name='text'
                                 value='YES'
                                 onChange={handleInputChange}
+                                defaultChecked={userSettings.Text == 'YES'}
                             />YES
                         </div>
                         <div className='sett-col'>
@@ -72,17 +73,19 @@ const UserSettings = () => {
                                 name='text'
                                 value='NO'
                                 onChange={handleInputChange}
+                                defaultChecked={userSettings.Text == 'NO'}
                             />NO
                         </div>
                     </div>
                     <div className='sett-row'>
-                        <div className='sett-col'>Images</div>
+                        <label className='sett-col'>Images</label>
                         <div className='sett-col'>
                             <input
                                 type='radio'
                                 name='img'
                                 value='YES'
                                 onChange={handleInputChange}
+                                defaultChecked={userSettings.Images == 'YES'}
                             />YES
                         </div>
                         <div className='sett-col'>
@@ -91,11 +94,12 @@ const UserSettings = () => {
                                 name='img'
                                 value='NO'
                                 onChange={handleInputChange}
+                                defaultChecked={userSettings.Images == 'NO'}
                             />NO
                         </div>
                     </div>
                     <div className='sett-row'>
-                        <div className='sett-col'>Speech</div>
+                        <label className='sett-col'>Speech</label>
                         <div className='sett-col'>
                             <input
                                 type='radio'
@@ -103,6 +107,7 @@ const UserSettings = () => {
                                 value='YES'
                                 disabled={true}
                                 onChange={handleInputChange}
+                                defaultChecked={userSettings.Speech == 'YES'}
                             />YES
                         </div>
                         <div className='sett-col'>
@@ -112,6 +117,7 @@ const UserSettings = () => {
                                 value='NO'
                                 disabled={true}
                                 onChange={handleInputChange}
+                                defaultChecked={userSettings.Speech == 'NO'}
                             />NO
                         </div>
                     </div>

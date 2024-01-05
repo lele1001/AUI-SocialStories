@@ -6,9 +6,13 @@ const TopBar = () => {
 
   return (
     <section className="top-bar">
-      <img className="top-bar-col logo" src="src\media\logo\LogoNoBackground.png" alt="logo" />
+      <h1 className="top-bar-col logo">
+        <img src="src\media\logo\LogoNoBackground.png" width={"70%"} alt="logo" />
+      </h1>
       <h1 className="top-bar-col title">Social Stories</h1>
-      <Button type='submit' className="top-bar-col exit" onClick={() => navigate('/')}>EXIT</Button>
+      <h1 className="top-bar-col logo">
+        <Button type='submit' className="top-bar-col exit" onClick={() => navigate('/')}>EXIT</Button>
+        </h1>
     </section>
   )
 }

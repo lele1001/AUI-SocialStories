@@ -20,23 +20,12 @@ const Inputs = () => {
 						body: JSON.stringify(title),
 					});
 				} else {
-					fetch('src/server/stories.json')
-						.then((response) => response.json())
-						.then((data) => {
-							for (let i = 0; i < data.length; i++) {
-								if (data[i].Title == title) {
-									localStorage.setItem("setting", data[i].Setting);
-								}
-							}
-						})
-						.catch((error) => console.error('Error fetching data:', error));
-
 					response = await fetch("http://localhost:3000/generate-story", {
 						method: "POST",
 						headers: {
 							"Content-Type": "application/json",
 						},
-						body: JSON.stringify(localStorage.getItem("setting")),
+						body: JSON.stringify(title),
 					});
 				}
 
@@ -52,7 +41,7 @@ const Inputs = () => {
 						localStorage.setItem("story", JSON.stringify(responseData));
 
 						// Redirect or perform any action after successful submission
-						if (localStorage.getItem('images') == "YES" && localStorage.getItem('storyType') == "online") {
+						if (localStorage.getItem('images') == "YES") {
 							navigate("/story-txt-img");
 						} else {
 							navigate("/story-txt");
@@ -76,9 +65,9 @@ const Inputs = () => {
 	}, []);
 
 	return (
-		<div className="container">
+		<label className="container">
 			Loading Story...
-		</div>
+		</label>
 	);
 };
 

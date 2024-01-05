@@ -12,7 +12,7 @@ const StoryType = () => {
     return (
         <section className="container-v">
             <h1 className="subtitle">Select the story type</h1>
-            <div className="container">
+            <div className="container" style={{gap: 50}}>
                 <Button className="save-button" onClick={() => click('offline')}>Offline</Button>
                 <Button className="save-button" onClick={() => click('online')}>Online</Button>
             </div>

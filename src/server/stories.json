@@ -1,7 +1,7 @@
 [
     {
         "Title": "The dentist",
-        "Scene": "I need to go to the dentist but I don't like being in places with a lot of people"
+        "Scene": "I need to go to the dentist but I don't like being in places with a lot of people "
     },
     {
         "Title": "Tidy the room",
@@ -14,5 +14,9 @@
     {
         "Title": "Anger",
         "Scene": "Help the kid understand that punching others is wrong"
+    },
+    {
+        "Title": "Supermarket",
+        "Scene": "I need to go to the supermarket but it is very crowded"
     }
 ]

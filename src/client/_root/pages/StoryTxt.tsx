@@ -20,7 +20,6 @@ const Story = () => {
 			setCurrentIndex(currentIndex + 1);
 		} 
 		else if (currentIndex == parts.length - 1) {
-			document.getElementById("next")!.textContent = "Finish";
 			navigate('/');
 		}
 	};
@@ -31,15 +30,17 @@ const Story = () => {
 		}
 	};
 
+	const nextButtonText = currentIndex === parts.length - 1 ? "Finish" : "Next";
+
 	return (
 		<section className="container-v">
-				<div className="story">{parts[currentIndex]}</div>
-				<div className="container">
-				<Button id="prev" className="save-button" onClick={handlePrevious}>
-						Previous
+				<label className="story">{parts[currentIndex]}</label>
+				<div className="story-container" style={{gap: 20}}>
+					<Button id="prev" className="save-button" onClick={handlePrevious}>
+							Previous
 					</Button>
-				<Button id="next" className="save-button" onClick={handleNext}>
-						Next
+					<Button id="next" className="save-button" onClick={handleNext}>
+						{nextButtonText}
 					</Button>
 				</div>
 		</section>

@@ -49,7 +49,7 @@ const Inputs = () => {
 					<div className="sett-title">Story Details</div>
 					<div className='sett-row'>
 						<label className="sett-col">Title</label>
-						<textarea className="story-col" style={{ height: '34px' }} name="title" placeholder="Title of the story" />
+						<textarea className="story-col" name="title" placeholder="Title of the story" />
 					</div>
 					<div className='sett-row'>
 						<label className="sett-col">Description</label>

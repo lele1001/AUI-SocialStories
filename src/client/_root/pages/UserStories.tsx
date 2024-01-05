@@ -62,14 +62,16 @@ const UserStories = () => {
           <tbody>
             {stories.map((myStory) => (
               <tr key={myStory.Title} className="sett-row">
-                <td>
+                <td className="settCellL">
                   <input
                     type="checkbox"
                     checked={checkedStories.includes(myStory.Title)}
                     onChange={() => handleCheckboxChange(myStory.Title)}
                   />
                 </td>
-                <td className="cell">{myStory.Title}</td>
+                <td className="settCellR">
+                  <label>{myStory.Title}</label>
+                </td>
               </tr>
             ))}
           </tbody>

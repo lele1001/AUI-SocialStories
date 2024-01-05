@@ -22,25 +22,35 @@ const Category = () => {
         .catch((error) => console.error('Error fetching data:', error));
     }
     else {
+      // retrieve stories from server
       fetch('src/server/stories.json')
         .then((response) => response.json())
         .then((data) => {
           setStories(data);
         })
         .catch((error) => console.error('Error fetching data:', error));
+
+      // retrieve images settings from server
+      fetch('src/server/userInfo.json')
+        .then((response) => response.json())
+        .then((data) => {
+          localStorage.setItem("images", data.settings.img);
+        })
+        .catch((error) => console.error('Error fetching images settings:', error));
     }
   }, []);
 
-  const handleButtonClick = (title: string) => {
-    localStorage.setItem("title", title); 
+  const handleButtonClick = (myStory: Story) => {
+    localStorage.setItem("title", myStory.Title); 
+    localStorage.setItem("setting", myStory.Scene);
     navigate("/loading");
   };
 
 
   return (
-    <div className="container-v">
+    <div className="container-v" style={{gap: 20}}>
       {stories.map((myStory) => (
-        <Button key={myStory.Title} className="save-button" onClick={() => handleButtonClick(myStory.Title)}>
+        <Button key={myStory.Title} className="save-button" onClick={() => handleButtonClick(myStory)}>
           {myStory.Title}
         </Button>
       ))}
