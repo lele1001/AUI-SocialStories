@@ -4,15 +4,26 @@ import { useEffect, useState } from "react";
 
 interface Story {
   Title: string;
+  Scene: string;
+  Lesson: string;
 }
 
-const UserStories = () => {
+const OnlineStories = () => {
   const [stories, setStories] = useState<Story[]>([]);
   const [checkedStories, setCheckedStories] = useState<string[]>([]);
+  const [editMode, setEditMode] = useState(false);
 
   useEffect(() => {
     fetchStories();
   }, []);
+
+  const toggleEditMode = () => {
+    setEditMode((prevEditMode) => !prevEditMode);
+
+    if (editMode) {
+      setCheckedStories([]);
+    }
+  };
 
   const fetchStories = () => {
     fetch('src/server/stories.json') 
@@ -56,7 +67,7 @@ const UserStories = () => {
         <table className="sett-table"> 
           <thead>
             <tr>
-              <th className="sett-title" colSpan={2}>Your Stories</th>
+              <th className="sett-title" colSpan={3}>Your Stories</th>
             </tr>
           </thead>
           <tbody>
@@ -66,20 +77,31 @@ const UserStories = () => {
                   <input
                     type="checkbox"
                     checked={checkedStories.includes(myStory.Title)}
+                    disabled={!editMode}
                     onChange={() => handleCheckboxChange(myStory.Title)}
                   />
                 </td>
-                <td className="settCellR">
+                <td className="settCellR" style={{ flex: "5" }}>
                   <label>{myStory.Title}</label>
+                </td>
+                <td className="settCellR">
+                  <label>{myStory.Lesson}</label>
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-        <Button type="submit" className="save-button" onClick={handleDelete}>Delete</Button>
+        <div style={{ gap: 20, display: "flex", width: "100%", justifyContent: "center" }}>
+          <Button className="save-button" onClick={toggleEditMode}>
+            {editMode ? 'Cancel' : 'Edit List'}
+          </Button>
+          {editMode && (
+            <Button type="submit" className="save-button" onClick={handleDelete}>Delete</Button>
+          )}
+        </div>
       </div>
     </section>
   );
 };
 
-export default UserStories;
+export default OnlineStories;

@@ -22,7 +22,6 @@ const Category = () => {
         .catch((error) => console.error('Error fetching data:', error));
     }
     else {
-      // retrieve stories from server
       fetch('src/server/stories.json')
         .then((response) => response.json())
         .then((data) => {

@@ -1,5 +1,7 @@
 import random
 import re
+from textwrap import fill
+from click import prompt
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import json
@@ -56,6 +58,33 @@ def add_story():
         stories.append(newStory)
         write_stories(stories)
 
+        # Generate 5 versions of the story for the offline mode 
+        story_versions = []
+        prompt = fill_prompt(newStory['Scene'], newStory['Lesson'])
+
+        for i in range(5):
+            story = generate_text(prompt)
+            messages = []
+
+            for message in story.split('\\n'):
+                message = message.replace('"',"")
+                part_name = message.split(":")[0].strip()
+                part_content = message.split(":")[1].strip()
+
+                messages.append(part_name)
+                messages.append(part_content)
+
+            story_versions.append(story)
+
+        # Save the story versions to the JSON file
+        with open('src/server/savedStories.json', 'r') as file:
+            savedStories = json.load(file)
+        
+        savedStories[newStory['Title']] = story_versions
+
+        with open('src/server/savedStories.json', 'w') as file:
+            json.dump(savedStories, file, indent=4)
+
         return jsonify({'message': 'Story added successfully'})
 
 # Function to delete some stories
@@ -97,29 +126,52 @@ def retrieve_story():
                 print(f"Available titles: {available_titles}")
                 
                 return jsonify({'parts': []})
-            
 
-# Function to generate a story based on a given prompt
-@app.route('/generate-story', methods=['POST'])
-def generate_story():
-    # Read the existing data from the files
+# Function to generate images using DALL-E
+def generate_images(images):
+    # Generating images using DALL-E
+    generated_images = []
+    for index, description in enumerate(images, start=1):
+        # Make a request to DALL-E API for image generation
+        response = Image.create(
+            prompt=description,
+            model="dall-e-3"
+        )
+
+        # Check if the request was successful
+        if response and 'data' in response and response['data']:
+            # Access the URL using image.data[0].url
+            generated_image_url = response['data'][0]['url']
+            generated_images.append(generated_image_url)
+            
+            # Display the successfully generated image and its corresponding part prompt
+            print(f"Generated Image {index} URL: {generated_image_url}")
+            print(f"Image {index} Description: {description}")
+        else:
+            print(f"Failed to generate image for prompt: {description}")
+
+    return generated_images
+
+# Function to generate images descriptions and part prompts
+def generate_text(prompt):
+    chat = ChatCompletion.create(
+        model="gpt-4",
+        messages=prompt
+    )
+
+    # Return the generated story as a JSON response
+    story = json.dumps(chat.choices[0].message.content)
+    return story
+
+# Function to fill the prompt with the necessary information
+def fill_prompt(scene, lesson):
     prompt = [0, 1, 2, 3, 4, 5, 6, 7, 8]
-    title = request.json
-    lesson = ""
-    
+
     with open('src/server/initial_prompt.json', 'r', encoding='utf-8') as file:
         myFile = json.load(file)
 
     with open('src/server/userInfo.json', 'r', encoding='utf-8') as file:
         userInfo = json.load(file)
-
-    with open('src/server/stories.json', 'r', encoding='utf-8') as file:
-        stories = json.load(file)
-
-        for story in stories:
-            if story['Title'] == title:
-                scene = story['Scene']
-                break        
 
     prompt[0] = myFile["first"]
     prompt[1] = myFile["second"]
@@ -149,16 +201,36 @@ def generate_story():
     }
     prompt[8]={
         "role":"user", 
-        "content":"START"}
+        "content":"START"
+    }
 
-    chat = ChatCompletion.create(
-        model="gpt-4",
-        messages=prompt
-    )
+    return prompt
 
-    # Return the generated story as a JSON response
-    story = json.dumps(chat.choices[0].message.content)
 
+# Function to generate a story based on a given prompt
+@app.route('/generate-story', methods=['POST'])
+def generate_story():
+    # Read the existing data from the files
+    prompt = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+    title = request.json
+
+    with open('src/server/userInfo.json', 'r', encoding='utf-8') as file:
+        userInfo = json.load(file)
+
+    with open('src/server/stories.json', 'r', encoding='utf-8') as file:
+        stories = json.load(file)
+
+        for story in stories:
+            if story['Title'] == title:
+                scene = story['Scene']
+                lesson = story['Lesson']
+                break  
+
+    prompt = fill_prompt(scene, lesson)
+
+    # Make a request to OpenAI API for story generation
+    story = generate_text(prompt)
+    
     images = []  # Store generated images
     part_prompts = []  # Store prompts related to parts
 
@@ -176,31 +248,10 @@ def generate_story():
 
     if userInfo['settings']['img'] == 'NO':
         return jsonify({'parts': part_prompts})
-
-    # Generating images using DALL-E
-    generated_images = []
-    for index, description in enumerate(images, start=1):
-        # Make a request to DALL-E API for image generation
-        response = Image.create(
-            prompt=description,
-            model="dall-e-3"
-        )
-
-        # Check if the request was successful
-        if response and 'data' in response and response['data']:
-            # Access the URL using image.data[0].url
-            generated_image_url = response['data'][0]['url']
-            generated_images.append(generated_image_url)
-            
-            # Display the successfully generated image and its corresponding part prompt
-            print(f"Generated Image {index} URL: {generated_image_url}")
-            print(f"Image {index} Description: {description}")
-            print(f"Part {index}: {part_prompts[index-1]}\n")
-        else:
-            print(f"Failed to generate image for prompt: {description}")
-
-    # Return generated images and part prompts as a JSON response
-    return jsonify({'images': generated_images, 'parts': part_prompts})
+    else:
+        generated_images = generate_images(images)
+        # Return generated images and part prompts as a JSON response
+        return jsonify({'images': generated_images, 'parts': part_prompts})
 
 if __name__ == '__main__':
     app.run(port=port, debug=True)

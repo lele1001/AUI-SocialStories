@@ -5,7 +5,7 @@ import './globals.css'
 // import LogIn from '@/_auth/forms/LogIn'
 // import SignUp from '@/_auth/forms/SignUp';
 // import AuthLayout from './_auth/AuthLayout';
-import { Home, Category, StoryTxt, StoryTxtImg, Inputs, UserSettings, Loading, UserStories, StoryType, UserProfile } from "@/client/_root/pages";
+import { Home, Category, StoryTxt, StoryTxtImg, Inputs, UserSettings, Loading, OfflineStories, StoryType, UserProfile, OnlineStories, Login } from "@/client/_root/pages";
 import RootLayout from './client/_root/RootLayout';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
@@ -22,11 +22,13 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
             {/* private routes*/}
             <Route element={<RootLayout />}>
                 <Route index element={<Home />} />
+                <Route path='/login' element={<Login />} />
 
                 <Route path='/inputs' element={<Inputs />} />
                 <Route path='/user-settings' element={<UserSettings />} />
                 <Route path='/user-profile' element={<UserProfile />} />
-                <Route path='/user-stories' element={<UserStories />} />
+                <Route path='/online-stories' element={<OnlineStories />} />
+                <Route path='/offline-stories' element={<OfflineStories />} />
 
                 <Route path='/category' element={<Category />} />
                 <Route path='/type' element={<StoryType />} />

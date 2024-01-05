@@ -23,5 +23,15 @@
         "Title": "The supermarket",
         "Scene": "The kid needs to go to the supermarket to buy some food without gettind distracted",
         "Lesson": "It is important to stay focused on what you need to buy"
+    },
+    {
+        "Title": "Calm down",
+        "Scene": "The kid is in a stressful situation and keeps shaking the legs",
+        "Lesson": "Give the kid some suggestions on how to calm down"
+    },
+    {
+        "Title": "Calm down",
+        "Scene": "The kid is very stressed and keeps shaking the legs",
+        "Lesson": "Provide the kid some strategies to calm down"
     }
 ]

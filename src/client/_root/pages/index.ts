@@ -1,8 +1,10 @@
 // Therapist pages
 export { default as Inputs } from './Inputs'
+export { default as Login } from './Login' // Fix the file name in the import statement
 export { default as UserSettings } from './UserSettings'
 export { default as UserProfile } from './UserProfile'
-export { default as UserStories } from './UserStories'
+export { default as OnlineStories } from './OnlineStories'
+export { default as OfflineStories } from './OfflineStories'
 
 // User pages
 export { default as Home } from './Home'

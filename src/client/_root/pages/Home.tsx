@@ -11,7 +11,7 @@ const Home = () => {
 
     return (
         <div className="container" style={{gap: 50}}>
-            <Button className="save-button" onClick={() => navigate('/user-profile')}>Settings</Button>
+            <Button className="save-button" onClick={() => navigate('/login')}>Settings</Button>
             <Button className="save-button" onClick={() => navigate('/type')}>Select the story</Button>
         </div>
     )

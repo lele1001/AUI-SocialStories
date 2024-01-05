@@ -8,8 +8,9 @@ const SideBar = () => {
     <section className="side-bar">
       <Button type='submit' className="side-button" onClick={() => navigate('/user-profile')}>User Profile</Button>
       <Button type='submit' className="side-button" onClick={() => navigate('/user-settings')}>Story Settings</Button>      
-      <Button type='submit' className="side-button" onClick={() => navigate('/user-stories')}>Manage the stories</Button>
-      <Button type='submit' className="side-button" onClick={() => navigate('/inputs')}>Add a story</Button>
+      <Button type='submit' className="side-button" onClick={() => navigate('/online-stories')}>Online Stories</Button>
+      <Button type='submit' className="side-button" onClick={() => navigate('/offline-stories')}>Offline Stories</Button>
+      <Button type='submit' className="side-button" onClick={() => navigate('/inputs')}>Add a Story</Button>
     </section>
   )
 }
