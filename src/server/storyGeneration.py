@@ -103,8 +103,9 @@ def retrieve_story():
 @app.route('/generate-story', methods=['POST'])
 def generate_story():
     # Read the existing data from the files
-    prompt = [0, 1, 2, 3, 4]
+    prompt = [0, 1, 2, 3, 4, 5, 6, 7, 8]
     title = request.json
+    lesson = ""
     
     with open('src/server/initial_prompt.json', 'r', encoding='utf-8') as file:
         myFile = json.load(file)
@@ -124,14 +125,29 @@ def generate_story():
     prompt[1] = myFile["second"]
     prompt[2] = {
         "role": "user",
-        "content": "The story is for " + userInfo['user']['name'] + " " + userInfo['user']['surname'] + ", which was born on " + userInfo['user']['birthDate'] + ". This person likes " + userInfo['user']['interests']
+        "content": "Character: " + userInfo['user']['name'] + ", which was born on " + userInfo['user']['birthDate'] + " and has the following problems: " + userInfo['user']['problems']
     }
     prompt[3] = {
         "role": "user", 
-        "content": "The scenario of the story is: " + scene + "\n Remember to keep any mention of the main character out of the images" 
+        "content": "Scene: " + scene 
     }
-    
-    prompt[4]={
+    prompt[4] = {   
+        "role": "user",
+        "content": "Lesson: " + lesson
+    }
+    prompt[5] = {
+        "role": "user",
+        "content": "Likes: " + userInfo['user']['interests']
+    }
+    prompt[6] = {
+        "role": "user",
+        "content": "Dislikes: " + userInfo['user']['fears']
+    }
+    prompt[7] = {   
+        "role": "user",
+        "content": "Remember to keep any mention of the main character out of the images"
+    }
+    prompt[8]={
         "role":"user", 
         "content":"START"}
 

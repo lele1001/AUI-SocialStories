@@ -3,10 +3,11 @@ import { Button } from '@/client/components/ui/button';
 import { useState, useEffect } from 'react';
 
 const UserSettings = () => {
+    const [editMode, setEditMode] = useState(false);
     const [userSettings, setUserSettings] = useState({
-        Text: '',
-        Images: '',
-        Speech: '',
+        text: '',
+        img: '',
+        speech: '',
     });
 
     const handleInputChange = (e: any) => {
@@ -14,6 +15,10 @@ const UserSettings = () => {
             ...userSettings,
             [e.target.name]: e.target.value,
         });
+    };
+
+    const toggleEditMode = () => {
+        setEditMode((prevEditMode) => !prevEditMode);
     };
 
     async function handleSubmit(e: any) {
@@ -31,6 +36,7 @@ const UserSettings = () => {
             if (response.ok) {
                 console.log('User settings saved successfully');
                 alert('User settings saved successfully');
+                setEditMode(false);
             } else {
                 console.error('Failed to save user settings');
             }
@@ -58,72 +64,90 @@ const UserSettings = () => {
                     <div className='sett-title'>Story Settings</div>
                     <div className='sett-row'>
                         <label className='sett-col'>Text</label>
-                        <div className='sett-col'>
+                        {editMode && 
+                            <div className='sett-col'>
                             <input
                                 type='radio'
                                 name='text'
                                 value='YES'
                                 onChange={handleInputChange}
-                                defaultChecked={userSettings.Text == 'YES'}
                             />YES
-                        </div>
-                        <div className='sett-col'>
-                            <input
-                                type='radio'
-                                name='text'
-                                value='NO'
-                                onChange={handleInputChange}
-                                defaultChecked={userSettings.Text == 'NO'}
-                            />NO
-                        </div>
+                            </div>
+                       }
+                       {editMode &&
+                            <div className='sett-col'>
+                                <input
+                                    type='radio'
+                                    name='text'
+                                    value='NO'
+                                    onChange={handleInputChange}
+                                />NO
+                            </div>
+                       }
+                       {!editMode && <label className='user-col'>{userSettings.text}</label>}
                     </div>
                     <div className='sett-row'>
                         <label className='sett-col'>Images</label>
-                        <div className='sett-col'>
-                            <input
-                                type='radio'
-                                name='img'
-                                value='YES'
-                                onChange={handleInputChange}
-                                defaultChecked={userSettings.Images == 'YES'}
-                            />YES
-                        </div>
-                        <div className='sett-col'>
-                            <input
-                                type='radio'
-                                name='img'
-                                value='NO'
-                                onChange={handleInputChange}
-                                defaultChecked={userSettings.Images == 'NO'}
-                            />NO
-                        </div>
+                        {editMode && 
+                            <div className='sett-col'>
+                                <input
+                                    type='radio'
+                                    name='img'
+                                    value='YES'
+                                    onChange={handleInputChange}
+                                />YES
+                            </div>
+                        }
+                        {editMode &&
+                            <div className='sett-col'>
+                                <input
+                                    type='radio'
+                                    name='img'
+                                    value='NO'
+                                    onChange={handleInputChange}
+                                />NO
+                            </div>
+                        }
+                        {!editMode && <label className='user-col'>{userSettings.img}</label>}
                     </div>
                     <div className='sett-row'>
                         <label className='sett-col'>Speech</label>
-                        <div className='sett-col'>
-                            <input
-                                type='radio'
-                                name='speech'
-                                value='YES'
-                                disabled={true}
-                                onChange={handleInputChange}
-                                defaultChecked={userSettings.Speech == 'YES'}
-                            />YES
-                        </div>
-                        <div className='sett-col'>
-                            <input
-                                type='radio'
-                                name='speech'
-                                value='NO'
-                                disabled={true}
-                                onChange={handleInputChange}
-                                defaultChecked={userSettings.Speech == 'NO'}
-                            />NO
-                        </div>
+                        {editMode &&
+                            <div className='sett-col'>
+                                <input
+                                    type='radio'
+                                    name='speech'
+                                    value='YES'
+                                    disabled={true}
+                                    onChange={handleInputChange}
+                                />YES
+                            </div>
+                        }
+                        {editMode &&
+                            <div className='sett-col'>
+                                <input
+                                    type='radio'
+                                    name='speech'
+                                    value='NO'
+                                    disabled={true}
+                                    onChange={handleInputChange}
+                                />NO
+                            </div>
+                        }
+                        {!editMode && <label className='user-col'>{userSettings.speech}</label>}
                     </div>
                 </div>
 
-                <Button className="save-button" type="submit">Save</Button>
+                <div style={{ gap: 20, display: "flex", width: "100%", justifyContent: "center" }}>
+                    <Button className="save-button" onClick={toggleEditMode}>
+                        {editMode ? 'Cancel' : 'Enable Edit'}
+                    </Button>
+                    {editMode && (
+                        <Button className="save-button" type="submit">
+                            Save
+                        </Button>
+                    )}
+                </div>
             </form>
         </section>
     );

@@ -56,7 +56,7 @@ const UserStories = () => {
         <table className="sett-table"> 
           <thead>
             <tr>
-              <th className="sett-title" colSpan={3}>Your Stories</th>
+              <th className="sett-title" colSpan={2}>Your Stories</th>
             </tr>
           </thead>
           <tbody>

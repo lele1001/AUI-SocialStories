@@ -1,8 +1,8 @@
 {
     "user": {
-        "name": "Mario",
-        "surname": "Rossi",
+        "name": "Mario Rossi",
         "birthDate": "2012-05-15",
+        "problems": "social anxiety",
         "fears": "spiders",
         "interests": "music"
     },

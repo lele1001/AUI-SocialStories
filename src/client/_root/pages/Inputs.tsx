@@ -9,7 +9,8 @@ const Inputs = () => {
 
 		if (
 			formData.get("title") == "" ||
-			formData.get("description") == ""
+			formData.get("scenario") == "" ||
+			formData.get("lesson") == ""
 		) {
 			alert("Error: Please fill all the fields");
 			return;
@@ -17,7 +18,8 @@ const Inputs = () => {
 
 		const story = {
 			Title: formData.get("title"),
-			Scene: formData.get("description"),
+			Scene: formData.get("scenario"),
+			Lesson: formData.get("lesson")
 		};
 
 		try {
@@ -52,9 +54,14 @@ const Inputs = () => {
 						<textarea className="story-col" name="title" placeholder="Title of the story" />
 					</div>
 					<div className='sett-row'>
-						<label className="sett-col">Description</label>
-						<textarea className="story-col" name="description"
-							placeholder="Brief description of the story"></textarea>
+						<label className="sett-col">Scenario</label>
+						<textarea className="story-col" name="scenario"
+							placeholder="Brief description of the story scenario"></textarea>
+					</div>
+					<div className='sett-row'>
+						<label className="sett-col">Lesson</label>
+						<textarea className="story-col" name="lesson"
+							placeholder="Provide the lesson to teach with this story"></textarea>
 					</div>
 				</div>
 

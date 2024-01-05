@@ -3,10 +3,11 @@ import SideBar from "@/client/components/shared/SideBar";
 import { useEffect, useState } from "react";
 
 const UserProfile = () => {
+    const [editMode, setEditMode] = useState(false);
     const [user, setUser] = useState({
         name: "",
-        surname: "",
         birthDate: "",
+        problems: "",
         fears: "",
         interests: "",
     });
@@ -18,13 +19,17 @@ const UserProfile = () => {
         });
     };
 
+    const toggleEditMode = () => {
+        setEditMode((prevEditMode) => !prevEditMode);
+    };
+
     async function handleSubmit(e: any) {
         e.preventDefault();  
 
         if (
             !user.name ||
-            !user.surname ||
             !user.birthDate ||
+            !user.problems ||
             !user.fears ||
             !user.interests
         ) {
@@ -44,6 +49,7 @@ const UserProfile = () => {
             if (response.ok) {
                 console.log('User information saved successfully');
                 alert("User information saved successfully");
+                setEditMode(false);
             } else {
                 console.error('Failed to save user information');
             }
@@ -60,7 +66,7 @@ const UserProfile = () => {
                 setUser(data.user); // Update user state with fetched data
             })
             .catch((error) => console.error('Error fetching data:', error));
-    }, []); 
+    }, []);
 
     return (
         <section className='container'>
@@ -77,17 +83,7 @@ const UserProfile = () => {
                             placeholder="Name"
                             value={user.name}
                             onChange={handleInputChange}
-                        />
-                    </div>
-                    <div className='sett-row'>
-                        <label className='sett-col'>Surname</label>
-                        <input
-                            className="user-col"
-                            type='text'
-                            name='surname'
-                            placeholder="Surname"
-                            value={user.surname}
-                            onChange={handleInputChange}
+                            disabled={!editMode}
                         />
                     </div>
                     <div className='sett-row'>
@@ -98,6 +94,18 @@ const UserProfile = () => {
                             name='birthDate'
                             value={user.birthDate}
                             onChange={handleInputChange}
+                            disabled={!editMode}
+                        />
+                    </div>
+                    <div className='sett-row'>
+                        <label className='sett-col'>Problems</label>
+                        <textarea
+                            className="user-col"
+                            name='problems'
+                            placeholder="anxiety, depression, etc."
+                            value={user.problems}
+                            onChange={handleInputChange}
+                            disabled={!editMode}
                         />
                     </div>
                     <div className='sett-row'>
@@ -105,9 +113,10 @@ const UserProfile = () => {
                         <textarea
                             className="user-col"
                             name='fears'
-                            placeholder="Fears"
+                            placeholder="spiders, heights, etc."
                             value={user.fears}
                             onChange={handleInputChange}
+                            disabled={!editMode}
                         />
                     </div>
                     <div className='sett-row'>
@@ -115,14 +124,24 @@ const UserProfile = () => {
                         <textarea
                             className="user-col"
                             name='interests'
-                            placeholder="Interests"
+                            placeholder="music, sports, etc."
                             value={user.interests}
                             onChange={handleInputChange}
+                            disabled={!editMode}
                         />
                     </div>
                 </div>
 
-                <Button className="save-button" type="submit">Save</Button>
+                <div style={{gap: 20, display: "flex", width: "100%", justifyContent: "center"}}>
+                    <Button className="save-button" onClick={toggleEditMode}>
+                        {editMode ? 'Cancel' : 'Enable Edit'}
+                    </Button>
+                    {editMode && (
+                        <Button className="save-button" type="submit">
+                            Save
+                        </Button>
+                    )}
+                </div>
             </form>
         </section>
     );
