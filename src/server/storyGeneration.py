@@ -56,8 +56,7 @@ def add_story():
 
         stories = get_stories()
         stories.append(newStory)
-        write_stories(stories)
-
+    
         # Generate 5 versions of the story for the offline mode 
         story_versions = []
         prompt = fill_prompt(newStory['Scene'], newStory['Lesson'])
@@ -81,6 +80,7 @@ def add_story():
             savedStories = json.load(file)
         
         savedStories[newStory['Title']] = story_versions
+        write_stories(stories)
 
         with open('src/server/savedStories.json', 'w') as file:
             json.dump(savedStories, file, indent=4)
