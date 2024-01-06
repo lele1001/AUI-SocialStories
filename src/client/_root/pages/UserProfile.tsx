@@ -12,15 +12,15 @@ const UserProfile = () => {
         interests: "",
     });
 
+    const changeEditMode = () => {
+        setEditMode(prevMode => !prevMode);
+    }
+
     const handleInputChange = (e: any) => {
         setUser({
             ...user,
             [e.target.name]: e.target.value,
         });
-    };
-
-    const toggleEditMode = () => {
-        setEditMode((prevEditMode) => !prevEditMode);
     };
 
     async function handleSubmit(e: any) {
@@ -36,6 +36,11 @@ const UserProfile = () => {
             alert("Error: Please fill all the fields");
             return;
         }
+
+        setUser({
+            ...user,
+            [e.target.name]: e.target.value,
+        });
                 
         try {
             const response = await fetch('http://localhost:3000/user-data', {
@@ -71,78 +76,91 @@ const UserProfile = () => {
     return (
         <section className='container'>
             <SideBar />
-            <form className="sett-form" onSubmit={handleSubmit}>
-                <div className='sett-table'>
-                    <div className='sett-title'>User Details</div>
-                    <div className='sett-row'>
-                        <label className='sett-col'>Name</label>
-                        <input
-                            className="user-col"
-                            type='text'
-                            name='name'
-                            placeholder="Name"
-                            value={user.name}
-                            onChange={handleInputChange}
-                            disabled={!editMode}
-                        />
-                    </div>
-                    <div className='sett-row'>
-                        <label className='sett-col'>Birth Date</label>
-                        <input
-                            className="user-col"
-                            type='date'
-                            name='birthDate'
-                            value={user.birthDate}
-                            onChange={handleInputChange}
-                            disabled={!editMode}
-                        />
-                    </div>
-                    <div className='sett-row'>
-                        <label className='sett-col'>Problems</label>
-                        <textarea
-                            className="user-col"
-                            name='problems'
-                            placeholder="anxiety, depression, etc."
-                            value={user.problems}
-                            onChange={handleInputChange}
-                            disabled={!editMode}
-                        />
-                    </div>
-                    <div className='sett-row'>
-                        <label className='sett-col'>Fears</label>
-                        <textarea
-                            className="user-col"
-                            name='fears'
-                            placeholder="spiders, heights, etc."
-                            value={user.fears}
-                            onChange={handleInputChange}
-                            disabled={!editMode}
-                        />
-                    </div>
-                    <div className='sett-row'>
-                        <label className='sett-col'>Interests</label>
-                        <textarea
-                            className="user-col"
-                            name='interests'
-                            placeholder="music, sports, etc."
-                            value={user.interests}
-                            onChange={handleInputChange}
-                            disabled={!editMode}
-                        />
-                    </div>
-                </div>
-
-                <div style={{gap: 20, display: "flex", width: "100%", justifyContent: "center"}}>
-                    <Button className="save-button" onClick={toggleEditMode}>
+            <div className="stories">
+                <table className="sett-table">
+                    <thead>
+                        <tr>
+                            <th className="sett-title">User Details</th>
+                        </tr>
+                    </thead>
+                    <tr className="sett-row">
+                        <td className="settCell2"><label>Name</label></td>
+                        <td className="settCell2">
+                            <input
+                                className="user-col"
+                                type='text'
+                                name='name'
+                                placeholder="Name"
+                                value={user.name}
+                                onChange={handleInputChange}
+                                disabled={!editMode}
+                            />
+                        </td>
+                    </tr>
+                    <tr className="sett-row">
+                        <td className="settCell2"><label>Birth Date</label></td>
+                        <td className="settCell2">
+                            <input
+                                className="user-col"
+                                type='date'
+                                name='birthDate'
+                                value={user.birthDate}
+                                onChange={handleInputChange}
+                                disabled={!editMode}
+                            />
+                        </td>
+                    </tr>
+                    <tr className="sett-row">
+                        <td className="settCell2"><label>Problems</label></td>
+                        <td className="settCell2">
+                            <textarea
+                                className="user-col"
+                                name='problems'
+                                placeholder="anxiety, depression, etc."
+                                value={user.problems}
+                                onChange={handleInputChange}
+                                disabled={!editMode}
+                            />
+                        </td>
+                    </tr>
+                    <tr className="sett-row">
+                        <td className="settCell2"><label>Fears</label></td>
+                        <td className="settCell2">
+                            <textarea
+                                className="user-col"
+                                name='fears'
+                                placeholder="spiders, heights, etc."
+                                value={user.fears}
+                                onChange={handleInputChange}
+                                disabled={!editMode}
+                            />
+                        </td>
+                    </tr>
+                    <tr className="sett-row">
+                        <td className="settCell2"><label>Interests</label></td>
+                        <td className="settCell2">
+                            <textarea
+                                className="user-col"
+                                name='interests'
+                                placeholder="music, sports, etc."
+                                value={user.interests}
+                                onChange={handleInputChange}
+                                disabled={!editMode}
+                            />
+                        </td>
+                    </tr>
+                </table>
+                <div style={{ gap: 20, display: "flex", width: "100%", justifyContent: "center" }}>
+                    <Button className="save-button" onClick={changeEditMode}>
                         {editMode ? 'Cancel' : 'Enable Edit'}
                     </Button>
-                    {editMode && (
-                        <Button className="save-button" type="submit">
+                    {editMode &&
+                        <Button className="save-button" onClick={handleSubmit}>
                             Save
                         </Button>
-                    )}
+                    }
                 </div>
-            </form>
+            </div>
         </section>
     );
 };
