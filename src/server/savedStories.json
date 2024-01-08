@@ -122,5 +122,113 @@
             "Image 5": "Mario and the other child sharing a smile, exchanging small tokens of friendship in Toy Story style",
             "Part 5": "Approaching the other child with the apology card and small tokens of friendship, Mario expressed his regret. The other child accepted Mario's gesture, and they reconciled. Mario learned that acknowledging mistakes and showing empathy helps in building strong, respectful relationships in the neighborhood."
         }
+    ],
+    "Tidy the room": [
+        {        
+            "Image 1": "A room filled with scattered toys and games in simplified Toy Story style",
+            "Part 1": "Meet Marco. Marco loved to play with his toys and games, but often left them scattered around the room. He liked his freedom, but this was causing a problem.",
+            "Image 2": "A tripping shoe over a toy car in simplified Toy Story style",
+            "Part 2": "Marco had many close calls, almost tripping over his own toys. He noticed how this could become dangerous and started to think about changes.", 
+            "Image 3": "A colorful tidy toy box with music notes dancing around it in simplified Toy Story style",
+            "Part 3": "One day, Marco thought of a fun idea! Every time he finished playing, he would put on his favorite music and tidy up to the rhythm.",
+            "Image 4": "A neat and organized room full of toys placed properly in simplified Toy Story style", 
+            "Part 4": "Now, Marco's room is always tidy after playtime. He learned how important and fun it can be to take care of his toys by tidying up. And he did it without meeting any scary spiders!\\n\\nLesson: Organizing can also be a fun game. Remember, It's important to tidy our room after we finish playing. Why not make it a dance party?"
+        },        
+        {
+            "Image 1": "A clutter of assorted children's toys scattered all over a room, including building blocks, soft toys, and plastic cars in a simple Toy Story style", 
+            "Part 1": "In a room, all sorts of toys were lying around everywhere. Building blocks, soft toys, plastic cars and many more. The room was in a state of complete disarray.", 
+            "Image 2": "A colorful toy box and a brightly colored musical note poster hanging on the wall in a simple Toy Story style ", 
+            "Part 2": "One side of the room had a colorful toy box big enough to store all the toys. On the wall, there was a poster of brightly colored musical notes.", 
+            "Image 3": "The previously messy room now tidy and clean with all the toys in the toy box in a simple Toy Story style", 
+            "Part 3": "Suddenly, the room was completely tidy! All the toys were neatly put away in the large, colorful toy box. There was no single toy left on the floor. ", 
+            "Image 4": "A smiley face badge glowing on a tidy room\\u2019s wall in a simple Toy Story style", 
+            "Part 4": "On the wall, a smiley face badge glowed brightly. It was a badge of honor for having a clean room. The room looked so spacious and beautiful without all the clutter. It could now be a perfect place to enjoy music."
+        },        
+        {
+            "Image 1": "A multitude of toys scattered around a vibrant, colorful room in simplified Toy Story style", 
+            "Part 1": "Marco's room is full of toys, marbles and books spread all around after he has finished playing. The sight might be overwhelming, and Marco starts to feel a bit of anxiety.", 
+            "Image 2": "A lively music poster hanging on the room wall accentuating a peaceful atmosphere in simplified Toy Story style",
+            "Part 2": "Marco loves music. It always calms him down. His favorite music band poster hangs on the wall, providing a sense of peace and soothes his anxiety.", 
+            "Image 3": "A clean and tidy vibrant room with organized toy shelves in simplified Toy Story style", 
+            "Part 3": "Marco remembers what his mom taught him about the importance of keeping the room tidy after playing. The thought of his room looking like the clean and organized room from the picture makes Marco feel better.", 
+            "Image 4": "Marco's arm placing a toy on an empty, neat toy shelf in simplified Toy Story style", 
+            "Part 4": "Gradually, Marco begins to pick up the toys, one after another, placing them neatly on the toy shelf. Every toy he puts back makes the room tidier and his anxiety lessen.", 
+            "Image 5": "A room again full of scattered toys turning into the tidy room from before in simplified Toy Story style", 
+            "Part 5": "His room which was cluttered with scattered toys gradually turns into a neat and well-organized room. Marco feels accomplished and more at ease. It was worth the effort to tidy the room after playing."
+        },        
+        {
+            "Image 1": "A disorganized and cluttered room filled with toys in simplified Toy Story style.", 
+            "Part 1": "The playroom was always fun. It was filled with toys that Marco loved to play with. But often, after playtime was over, the room would be left in disarray.", 
+            "Image 2": "A picture of neatly organized toy shelves with a variety of toys in simplified Toy Story style.", 
+            "Part 2": "One day, Marco decided things needed to change. He remembered what he had learned - it is important to tidy up after playing. It takes time, but it also makes finding toys easier the next time.", 
+            "Image 3": "A cheerful picture of a radio playing beautiful music in simplified Toy Story style.", 
+            "Part 3": "Marco's idea was to make tidying up fun! He brought his radio into the room and turned on his favorite tunes. As the music played, he started tidying up. The job that seemed difficult was suddenly enjoyable.", 
+            "Image 4": "A room that's tidy, clean and well organized in simplified Toy Story style.", 
+            "Part 4": "The result? A beautifully tidy playroom. Marco felt proud. No more struggling to find his toys. By tidying up, Marco turned his playroom into a more enjoyable place. Now he knew how important it was to tidy up after playing."
+        },        
+        {
+            "Image 1": "A collection of scattered toys, paints, and books on a brightly colored playroom floor in simplified Toy Story style", 
+            "Part 1": "Marco loves to play in his playroom, it has all of his favorite things. After hours of fun, Marco finds the room is in quite a mess, toys and books scattered all around. ", 
+            "Image 2": "A toy box with a fun design, open and empty in simplified Toy Story style", 
+            "Part 2": "Marco remembers a beautiful music tune about tidying up. It says \\\"each toy has a home\\\", referring to the empty toy box in the corner. Marco starts to think on that.", 
+            "Image 3": "A child's hands placing a toy into the toy box carefully in simplified Toy Story style", 
+            "Part 3": "Enthusiasm inspired by music, Marco shows his courage. He starts placing each toy back into the toy box carefully, just like in the song. ", 
+            "Image 4": "A neatly organized room with toys, paints, and books in their respective places in simplified Toy Story style", 
+            "Part 4": "After tidying up, Marco feels a sense of accomplishment. He learned that coming back to a clean room made getting to play next time even more exciting. And the best part, there were no scary spiders hiding under the mess! Marco learned how fun and useful tidying up can be.\""
+        }    
+    ],
+    "Calm dowm": [
+        {
+            "Image 1": "Musical notes floating in the air in a bright, colorful room, with a player piano in the corner in simplified Toy Story style",
+            "Part 1": "Marco was in a colorful room full of people, noise was everywhere. He felt the familiar twinge of nervousness creeping up his spine. He glanced at a corner and noticed a player piano, it started playing soothing music.",
+            "Image 2": "A crowd of cartoonish people engaging in lively conversation in simplified Toy Story style",
+            "Part 2": "He looked around, the room was full of chattering people. The noise was a bit too much for him, but he remembered the lesson his teacher had taught him.",
+            "Image 3": "Close-up of a soft plush toy in the shape of an ear cushioned by cotton puff clouds in simplified Toy Story style",
+            "Part 3": "Breathe in, breathe out, imagine a soft toy, gentle and comforting. He focused on the music and its calming rhythm filling the room.",
+            "Image 4": "Room dimming down with spotlight focused solely on the player piano, colourful musical notes drifting across in simplified Toy Story style",
+            "Part 4": "As the melody drifted around the room, the noise seemed to fade, like it was getting farther and farther away. The music filled his senses, the room felt quieter and he felt more at ease."
+        },
+        {
+            "Image 1": "\\A vibrant, bustling room full of people, some are dancing, some are talking loudly. Bright lights and balloons hanging from the ceiling, indicating a celebration is occurring\\ in simplified Toy Story style.",
+            "Part 1": "In a room full of people, there was a lot of noise. Everyone was dancing and talking loudly. Bright colorful lights and balloons indicated a big celebration.",
+            "Image 2": "\\A pair of noise-canceling headphones resting on a table, next to a smartphone playing a soft melody\\ in simplified Toy Story style.",
+            "Part 2": "Near a table, lay a pair of noise-cancelling headphones. A mobile phone was playing a calm, soft melody. This music was very calming and soothing.",
+            "Image 3": "\\A quiet, comfortable corner of the room with a cozy bean bag chair and a bookshelf full of books\\ in simplified Toy Story style.",
+            "Part 3": "There was a quiet corner in the room. A large, comfortable bean bag chair sat there, surrounded by a bookshelf stuffed with interesting books.",
+            "Image 4": "\\A glass of water resting on a small table, the water is calm\\ in simplified Toy Story style.",
+            "Part 4": "A glass of water was placed on a small table. Despite the noise and the chaos, the water in the glass was still and calm.",
+            "Image 5": "\\Everyone in the room beginning to calm down, the noise decreasing, people starting to sit and relax\\ in simplified Toy Story style.",
+            "Part 5": "The noise in the room began to lessen as people started to tire out. They began to sit down and relax, the room becoming much calmer."
+        },
+        {
+            "Image 1": "A buzzing room filled with children, bright lights, and decorations in simplified Toy Story style.",
+            "Part 1": "Marco found himself in a loud room, filled with children, bright lights, and decorations. He felt nervous because the noise levels were about to make him uneasy.",
+            "Image 2": "A colorful pair of earphones beside a smartphone playing soothing music, displayed on a calm setting, in simplified Toy Story style.",
+            "Part 2": "Marco remembered that he loves music. He took out his earphones and cellphone, deciding that a bit of his favorite tunes might make the noise more bearable.",
+            "Image 3": "Kids peacefully enjoying music, sharing earphones, and appearing relaxed in a lively setup, in simplified Toy Story style.",
+            "Part 3": "As the earphones played his favorite melody, the noise around seemed to merge with the rhythm. Marco started feeling more comfortable and began to relax, realizing that he could manage his feelings even amidst the noise.",
+            "Image 4": "A peaceful room now with kids either listening to music or engaging in calm activities, noticeably quieter, in simplified Toy Story style.",
+            "Part 4": "Soon, the room which once felt overwhelmingly loud, turned into a calm place. Marco now felt he belonged, understanding that even noisy spaces could feel calmer with a bit of his favorite music."
+        },
+        {
+            "Image 1": "A brightly colored children's birthday party with balloons, music notes floating in the air and children playing games, smiling and laughing\\ in simplified Toy Story style.",
+            "Part 1": "Marco attended a birthday party. There were a lot of exciting things happening, such as a bunch of balloons, and children playing various games. Music notes filled the air indicating a celebration. Marco loves music, but he couldn\\u2019t enjoy it because he was nervous due to the excessive noise in the room.",
+            "Image 2": "A cluttered, chaotic room with noise symbols filling the air to represent loud environment in simplified Toy Story style.",
+            "Part 2": "The noise in the room was represented by many loudspeaker symbols hanging in the air. The chaos made Marco's social anxiety worse. He felt uncomfortable and afraid.",
+            "Image 3": "A quiet corner with a fluffy, comfortable-looking chair and headphones lying on it in simplified Toy Story style.",
+            "Part 3": "Marco found a fluffy chair in a quiet corner of the room, away from the noise. On the seat laid his favorite object - headphones. Putting on his headphones, he played his favorite songs.",
+            "Image 4": "A warm, gently lit scene surrounded by a calming bubble shield that dulls out the noisy chaos outside, represented by muted loudspeaker symbols\\ in simplified Toy Story style.",
+            "Part 4": "After Marco put his headphones on, tranquil music poured into his ears and drowned out the noise. The surrounding chaos turned into muted loudspeaker symbols, the bubble-like shield indicating calm and peace. This story teaches the lesson of staying calm in noisy situations and finding our own little safe corner to soothe our nerves."
+        },
+        {
+            "Image 1": "A brightly lit room filled with people chatting, a balloon popping, and children playing with toys, in simplified Toy Story style.",
+            "Part 1": "In a noisy room filled with chattering people and balloon pops, Marco felt his anxiety rising. The clamor was noisy but he remembered his love for music.",
+            "Image 2": "A pair of earphones connected to a peaceful and calm music album cover, lying on a table, in simplified Toy Story style.\\",
+            "Part 2": "With music in mind, he decided to put on his earphones. The music was calm and peaceful and it drowned out the unwanted chaotic sounds.",
+            "Image 3": "A minimalist, peaceful environment with soft nature sounds in simplified Toy Story style.",
+            "Part 3": "Gradually, the noises of the room transformed in Marco's mind. As he listened to the music, he started to imagine himself in a peaceful natural environment.",
+            "Image 4": "People in room continuing their activities quietly, in simplified Toy Story style.",
+            "Part 4": "Eventually, the room's noise didn't disturb Marco any longer. He learned, that even though the world is noisy, music can be his place of tranquility. This day, Marco learnt a valuable lesson about how to stay calm in noisy situations."
+        }
     ]
 }

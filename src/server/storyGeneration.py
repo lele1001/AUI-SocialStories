@@ -1,6 +1,7 @@
 import random
 import re
 from textwrap import fill
+from turtle import st
 from click import prompt
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -72,17 +73,24 @@ def add_story():
 
         for i in range(5):
             story = generate_text(prompt)
-            messages = []
+            images = []  # Store prompts related to images
+            part_prompts = []  # Store prompts related to parts
+            current_story = {}
 
-            for message in story.split('\\n'):
+            messages = story.split('\\n')
+            msg_num = 1
+
+            for message in messages:
                 message = message.replace('"',"")
-                part_name = message.split(":")[0].strip()
-                part_content = message.split(":")[1].strip()
+                print(message)
 
-                messages.append(part_name)
-                messages.append(part_content)
+                if message.startswith("Image"):
+                    current_story["Image " + str(msg_num)] = message.split(":")[1].strip()
+                elif message.startswith("Part"):
+                    current_story["Part " + str(msg_num)] = message.split(":")[1].strip()
+                    msg_num += 1
 
-            story_versions.append(story)
+            story_versions.append(current_story)
 
         savedStories = get_offline_stories()
         savedStories[newStory['Title']] = story_versions

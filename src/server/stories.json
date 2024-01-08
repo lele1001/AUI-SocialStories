@@ -5,11 +5,6 @@
         "Lesson": "It is important to go to the dentist, even if it is crowded."
     },
     {
-        "Title": "Tidy the room",
-        "Scene": "The room is always messy and the kid doesn't want to tidy it up",
-        "Lesson": "It is important to clean the room after playing"
-    },
-    {
         "Title": "The bus",
         "Scene": "The bus is always crowded and for the kid is hard to stay in crowded places",
         "Lesson": "When places are crowded, it is important to stay calm. Think about something you like"
@@ -20,8 +15,13 @@
         "Lesson": "It is important to stay calm and not punch others"
     },
     {
-        "Title": "Calm down",
-        "Scene": "The kid is in a stressful situation and keeps shaking the legs",
-        "Lesson": "Give the kid some suggestions on how to calm down"
+        "Title": "Tidy the room",
+        "Scene": "The room is always messy after playing",
+        "Lesson": "It is important to tidy the room after playing"
+    },
+    {
+        "Title": "Calm dowm",
+        "Scene": "The kid is nervous because there is a lot of noise in the room",
+        "Lesson": "It is important to stay calm, even if there is a lot of noise in the room"
     }
 ]
