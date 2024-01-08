@@ -37,7 +37,7 @@ const OfflineStories = () => {
     };
 
     const handleDelete = () => {
-        fetch('http://localhost:3000/delete-stories', {
+        fetch('http://localhost:3000/delete-offline-stories', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'

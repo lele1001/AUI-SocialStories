@@ -38,22 +38,31 @@ def user_data():
 
     return jsonify({'message': 'User data saved successfully'})
 
-# Function to read stories from the JSON file
+# Function to retrieve information of online stories from the JSON file
 def get_stories():
     with open('src/server/stories.json', 'r') as file:
         return json.load(file)
 
-# Function to write stories to the JSON file
+# Function to retrieve offline stories from the JSON file  
+def get_offline_stories():
+    with open('src/server/savedStories.json', 'r') as file:
+        return json.load(file)
+
+# Function to write information of online stories to the JSON file
 def write_stories(stories):
     with open('src/server/stories.json', 'w') as file:
         json.dump(stories, file, indent=4)
 
-# Function to add a story
+# Function to write offline stories to the JSON file
+def write_offline_stories(stories):
+    with open('src/server/savedStories.json', 'w') as file:
+        json.dump(stories, file, indent=4)
+
+# Function to add a story for the online and the offline mode
 @app.route('/add-story', methods=['POST'])
 def add_story():
     if request.method == 'POST':
         newStory = request.json
-
         stories = get_stories()
         stories.append(newStory)
     
@@ -75,27 +84,41 @@ def add_story():
 
             story_versions.append(story)
 
-        # Save the story versions to the JSON file
-        with open('src/server/savedStories.json', 'r') as file:
-            savedStories = json.load(file)
-        
+        savedStories = get_offline_stories()
         savedStories[newStory['Title']] = story_versions
+
         write_stories(stories)
-
-        with open('src/server/savedStories.json', 'w') as file:
-            json.dump(savedStories, file, indent=4)
-
+        write_offline_stories(savedStories)
         return jsonify({'message': 'Story added successfully'})
 
-# Function to delete some stories
+# Function to delete information of some online stories
 @app.route('/delete-stories', methods=['DELETE'])
 def delete_stories():
     if request.method == 'DELETE':
         stories = request.get_json()
         checkedStories = stories.get('checkedStories', [])
         oldStories = get_stories()
-        updatedStories = [story for story in oldStories if story['Title'] not in checkedStories]
+
+        updatedStories = []
+        for story in oldStories:
+            if story['Title'] not in checkedStories:
+                updatedStories.append(story)
+        
         write_stories(updatedStories)
+        return jsonify({'message': 'Stories deleted successfully'})
+    
+# Function to delete some offline stories
+@app.route('/delete-offline-stories', methods=['DELETE'])
+def delete_offline_stories():
+    if request.method == 'DELETE':
+        stories = request.get_json()
+        checkedStories = stories.get('checkedStories', [])
+        oldStories = get_offline_stories()
+
+        for story in checkedStories:
+            del oldStories[story]
+
+        write_offline_stories(oldStories)
         return jsonify({'message': 'Stories deleted successfully'})
 
 # Function to retrieve a saved story
@@ -103,29 +126,26 @@ def delete_stories():
 def retrieve_story():
     if request.method == 'POST':      
         title = request.json
-        storyNumber = random.randint(0, 4)
-        print("Title: ", title)
-        
-        with open('src/server/savedStories.json', 'r') as file:
-            savedStories = json.load(file)
+        storyNumber = random.randint(0, 4)        
+        savedStories = get_offline_stories()
 
-            if title in savedStories:
-                story_versions = savedStories[title]
-                selected_story = story_versions[storyNumber]
+        if title in savedStories:
+            story_versions = savedStories[title]
+            selected_story = story_versions[storyNumber]
 
-                print(selected_story)
+            print(selected_story)
+            parts = []
 
-                parts = []
-                for key, value in selected_story.items():
-                    if key.startswith("Part"):
-                        parts.append(value)
+            for key, value in selected_story.items():
+                if key.startswith("Part"):
+                    parts.append(value)
 
-                return jsonify({'parts': parts})
-            else:
-                available_titles = list(savedStories.keys())
-                print(f"Available titles: {available_titles}")
-                
-                return jsonify({'parts': []})
+            return jsonify({'parts': parts})
+        else:
+            available_titles = list(savedStories.keys())
+            print(f"Available titles: {available_titles}")
+            
+            return jsonify({'parts': []})
 
 # Function to generate images using DALL-E
 def generate_images(images):
@@ -154,10 +174,7 @@ def generate_images(images):
 
 # Function to generate images descriptions and part prompts
 def generate_text(prompt):
-    chat = ChatCompletion.create(
-        model="gpt-4",
-        messages=prompt
-    )
+    chat = ChatCompletion.create(model="gpt-4", messages=prompt)
 
     # Return the generated story as a JSON response
     story = json.dumps(chat.choices[0].message.content)
@@ -217,14 +234,13 @@ def generate_story():
     with open('src/server/userInfo.json', 'r', encoding='utf-8') as file:
         userInfo = json.load(file)
 
-    with open('src/server/stories.json', 'r', encoding='utf-8') as file:
-        stories = json.load(file)
+    stories = get_stories()
 
-        for story in stories:
-            if story['Title'] == title:
-                scene = story['Scene']
-                lesson = story['Lesson']
-                break  
+    for story in stories:
+        if story['Title'] == title:
+            scene = story['Scene']
+            lesson = story['Lesson']
+            break  
 
     prompt = fill_prompt(scene, lesson)
 
