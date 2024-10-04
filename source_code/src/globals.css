@@ -1,0 +1,280 @@
+html {
+	display: flex;
+	padding: 0;
+	margin: 0;
+	--txt-blue: #1982C4;
+	--bg-blue: #DFFFFD;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--bg-blue);
+	font-family: "Inter", sans-serif;
+	color: var(--txt-blue);
+	font-size: 20px;
+	width: 100%;
+	height: 100%;
+}
+
+section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	height: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+body {
+	display: flex;
+	width: 100%;
+	height: 100%;
+}
+
+textarea, input {
+	resize: none;
+	font-size: 125%;
+	font-family: "Inter", sans-serif;
+}
+
+label {
+	font-size: 150%;
+}
+
+:focus {
+	outline: none;
+}
+
+:root {
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	padding: 0;	
+	border: 0;
+} 
+
+::placeholder {
+	color: lightgrey;
+	font-size: 125%;
+}
+
+.container {
+	height: inherit;
+	width: inherit;
+	display: flex;
+	flex-direction: row;
+	padding: 0;
+	margin: 0;
+	align-items: center;
+	justify-content: center;
+}
+
+.container-v {
+	height: inherit;
+	display: flex;
+	flex-direction: column;
+	padding: 0;
+	margin: 0;
+	width: 100%;
+	align-items: center;
+}
+
+.story-container {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	padding: 2%;
+	align-items: center;
+	justify-content: center;
+}
+
+.side-bar {
+	height: inherit;
+	background-color: white;
+	color: var(--txt-blue);
+	min-width: 20%;
+	max-width: 20%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-direction: column;
+}
+
+.side-button {
+	width: 100%;
+	height: 100%;
+	font-size: 150%;
+	border: none;
+	background-color: transparent;
+	color: var(--txt-blue);
+}
+
+.top-bar {
+	width: 100%;
+	height: min-content;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	flex-wrap: nowrap;
+	flex-direction: row;
+}
+
+.top-bar-col {
+	text-align: center;
+}
+
+.logo {
+	width: 20%;
+	align-items: center;
+}
+
+.title {
+	font-size: 400%;
+	font-weight: bold;
+	width: 60%;
+}
+
+.subtitle {
+	font-size: 250%;
+	font-weight: bold;
+}
+
+.exit {
+	width: 65%;
+	background-color: var(--txt-blue);
+	color: white;
+	border-radius: 10px;
+	font-size: 150%;
+	padding: 5%;
+	padding-bottom: 8%;
+	padding-top: 8%;
+	border: none;
+}
+
+.sett-form {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	text-align: center;
+	justify-items: center;
+	align-items: center;
+}
+
+.sett-table {
+	text-align: center;
+	padding-bottom: 3%;
+	width: 80%;
+}
+
+.sett-title {
+	color: white;
+	background-color: var(--txt-blue);
+	font-size: 200%;
+	font-weight: bold;
+	border-start-start-radius: 15px;
+	border-start-end-radius: 15px;
+	padding: 1%;
+}
+
+.sett-row {
+	display: flex;
+	flex-direction: row;
+	text-align: center;
+	justify-items: center;
+	padding: 1%;
+	background-color: white
+}
+
+.sett-row td:first-child {
+	padding: 2%;
+	padding-right: 1%;
+}
+
+.sett-row:last-child {
+	border-bottom-left-radius: 15px;
+	border-bottom-right-radius: 15px;
+}
+
+.sett-col {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	text-align: center;
+	justify-items: center;
+	align-items: center;
+	font-size: 150%;
+}
+
+.sett-col label {
+	width: 30%;
+	font-size: 150%;
+}
+
+.settCellL {
+	display: flex;
+	flex: 1;
+	justify-content: center;
+}
+
+.settCell2 {
+	display: flex;
+	flex: 1;
+	justify-content: center;
+}
+
+.settCellR {
+	display: flex;
+	flex: 10;
+	align-items: center;
+}
+
+.save-button {
+	min-width: 25%;
+	min-height: 15%;
+	background-color: var(--txt-blue);
+	color: white;
+	border-radius: 12px;
+	font-size: 150%;
+	padding: 2%;
+	border: none;
+}
+
+.user-col {
+	text-align: center;
+	border: 1px solid var(--txt-blue);
+	border-radius: 10px;
+	width: 60%;
+}
+
+.story-col {
+	text-align: center;
+	border: 1px solid var(--txt-blue);
+	border-radius: 10px;
+	margin-right: 16px;
+	width: 65%;
+}
+
+.stories {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	text-align: center;
+	justify-items: center;
+	align-items: center;
+	padding: 30px;
+	padding-top: 60px;
+}
+
+.story {
+	display: flex;
+	width: 70%;
+	min-height: 5%;
+	text-align: center;
+	background-color: white;
+	border-radius: 10px;
+	padding: 2%;
+}
+
+.story-img {
+	width: 30%;
+}
