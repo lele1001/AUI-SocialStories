@@ -8,6 +8,7 @@ from flask_cors import CORS
 import json
 import openai
 from openai import ChatCompletion, Image
+import os
 
 app = Flask(__name__)
 port = 3000
@@ -278,4 +279,5 @@ def generate_story():
         return jsonify({'images': generated_images, 'parts': part_prompts})
 
 if __name__ == '__main__':
-    app.run(port=port, debug=True)
+    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() in ['true', '1', 't']
+    app.run(port=port, debug=debug_mode)
