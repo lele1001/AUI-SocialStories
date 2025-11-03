@@ -15,7 +15,7 @@ port = 3000
 CORS(app)
 
 # Set up your OpenAI API keys
-api_key = "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"
+api_key = "api_key"
 openai.api_key = api_key
 
 # Function to save the user data to a JSON file
